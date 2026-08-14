@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Química II | Clase 2: Estado Sólido y Redes Cristalinas</title>
 
-<!-- Carga de MathJax para renderizado correcto de fórmulas químicas y matemáticas -->
+<!-- Carga de MathJax -->
 <script>
   MathJax = {
     tex: {
@@ -19,25 +19,12 @@
 
 <style>
     :root {
-        /* Paleta armonizada con el Logo QII (verde esmeralda + ámbar dorado) */
-        --QII-gold: #D97706;       /* Ámbar dorado de la serpiente y detalles del logo */
-        --QII-dark: #022C22;       /* Verde pizarra muy oscuro (fondos header/nav) */
-        --QII-blue: #064E3B;       /* Verde esmeralda profundo (reemplaza azul institucional) */
-        --QII-light: #10B981;      /* Esmeralda vibrante (serpiente/hojas del logo) */
-        --accent: #DC2626;         /* Rojo rubí (alertas / indicador ácido) */
-        --accent-orange: #F59E0B;  /* Ámbar claro (complemento dorado) */
-        --accent-purple: #7C3AED;  /* Violeta (contraste elegante con verde) */
-        --text: #111827;           /* Gris carbón (texto principal) */
-        --white: #ffffff;
-        --sand: #FEF3C7;           /* Crema ámbar (fondos cálidos) */
-        --shadow: rgba(0, 0, 0, 0.25);
+        --QII-gold: #D97706; --QII-dark: #022C22; --QII-blue: #064E3B; --QII-light: #10B981;
+        --accent: #DC2626; --accent-orange: #F59E0B; --accent-purple: #7C3AED;
+        --text: #111827; --white: #ffffff; --sand: #FEF3C7; --shadow: rgba(0, 0, 0, 0.25);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    ul:not(.map-tree), ol {
-        padding-left: 2.4rem;
-        margin: 0.5rem 0 1rem;
-    }
+    ul:not(.map-tree), ol { padding-left: 2.4rem; margin: 0.5rem 0 1rem; }
     ul:not(.map-tree) { list-style: none; }
     ul:not(.map-tree) li, ol li { margin: 0.45rem 0; }
 
@@ -59,8 +46,10 @@
     .card:hover { transform: translateY(-3px); }
     h2 { color: var(--QII-blue); margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 3px solid var(--QII-gold); display: flex; align-items: center; gap: 0.8rem; font-size: 2rem; }
     h3 { color: var(--QII-light); margin: 1.5rem 0 1rem; font-size: 1.5rem; }
-    .molecule-img { max-width: 100%; max-height: 400px; height: auto; border-radius: 12px; margin: 1rem 0; box-shadow: 0 4px 12px var(--shadow); object-fit: contain; }
-    .img-container { text-align: center; margin: 2rem 0; background: #f8fafc; padding: 1rem; border-radius: 12px; border: 1px dashed var(--QII-gold); }
+    p { margin-bottom: 1rem; }
+    .molecule-img { max-width: 100%; max-height: 450px; height: auto; border-radius: 12px; margin: 1rem 0; box-shadow: 0 4px 12px var(--shadow); object-fit: contain; }
+    .img-container { text-align: center; margin: 2rem 0; background: #f8fafc; padding: 1.5rem; border-radius: 12px; border: 1px dashed var(--QII-gold); }
+    .img-caption { font-style: italic; color:#666; margin-top: 0.5rem; font-size: 0.95rem; }
     .calculator { background: linear-gradient(135deg, #fefcbf 0%, #fef3c7 100%); border: 3px solid var(--QII-gold); border-radius: 16px; padding: 2rem; margin: 2rem 0; }
     .calc-title { color: var(--QII-dark); font-size: 1.6rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; font-weight: bold; }
     .calc-input-group { margin: 1rem 0; }
@@ -135,7 +124,6 @@
     .fc-btn.good { background: #38a169; } .fc-btn.bad { background: #e53e3e; }
     .fc-btn:not(:disabled):hover { transform: translateY(-3px); }
     .fc-link { background: none; border: none; color: #718096; text-decoration: underline; cursor: pointer; font-size: 0.85rem; margin-top: 1rem; }
-
     .map-container { overflow-x: auto; padding: 1rem 0; }
     .map-tree, .map-tree ul { list-style: none; margin: 0; padding-left: 0; }
     .map-tree ul { display: none; padding-left: 1.6rem; margin: 0.6rem 0 0; border-left: 3px solid var(--QII-gold); }
@@ -148,9 +136,11 @@
     .map-leaf { display: inline-block; background: #fff; color: var(--text); padding: 0.45rem 0.9rem; border-radius: 8px; font-size: 0.95rem; border: 2px solid var(--QII-gold); }
     li.has-children > .map-node::before { content: '▶ '; font-size: 0.8em; }
     li.has-children.open > .map-node::before { content: '▼ '; font-size: 0.8em; }
-
     .img-guide-box { background: #f0f4f8; border: 2px dashed var(--QII-blue); padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; }
     .img-guide-title { font-weight: 700; color: var(--QII-blue); margin-bottom: 0.8rem; }
+    .interactive-cell-box { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 1.5rem 0; }
+    .interactive-btn { padding: 1rem 1.5rem; border-radius: 12px; background: var(--QII-blue); color: white; border: 2px solid var(--QII-gold); cursor: pointer; font-weight: bold; transition: 0.3s; }
+    .interactive-btn:hover { background: var(--QII-gold); color: var(--QII-dark); }
 
     @media (max-width: 768px) {
         h1 { font-size: 1.8rem; } h2 { font-size: 1.5rem; } h3 { font-size: 1.2rem; }
@@ -201,20 +191,21 @@
         <h2>🎯 Resultados del Aprendizaje</h2>
         <div class="info-box">
             <ul style="font-size: 1.1rem; line-height: 2;">
-                <li>✓ Describir las características generales del estado sólido.</li>
+                <li>✓ Describir las características generales del estado sólido y la rigidez de sus enlaces.</li>
                 <li>✓ Comparar las propiedades de los sólidos cristalinos frente a los sólidos amorfos.</li>
-                <li>✓ Relacionar las propiedades físicas (punto de fusión, dureza, conductividad) con el tipo de estructura cristalina.</li>
-                <li>✓ Calcular el número de partículas (átomos, iones o moléculas) presentes en la celda unitaria.</li>
+                <li>✓ Relacionar las propiedades físicas (punto de fusión, dureza, conductividad) con el tipo de estructura cristalina (iónica, metálica, covalente, molecular).</li>
+                <li>✓ Calcular el número de partículas (átomos, iones o moléculas) presentes en la celda unitaria mediante la interpretación geométrica de redes de Bravais.</li>
+                <li>✓ Aplicar la Ley de Coulomb para comprender la energía de red en los cristales iónicos.</li>
             </ul>
         </div>
 
         <h3>🔬 Relevancia Profesional para Ciencias de la Salud</h3>
         <div class="bio-box">
-            <div><strong>¿Por qué estudiar el Estado Sólido en Química?</strong>
+            <div><strong>¿Por qué el estudiante debe dominar el Estado Sólido?</strong>
                 <ul style="font-size: 1rem; margin-top: 1rem;">
-                    <li>• <strong>Farmacia:</strong> La estructura cristalina de un fármaco afecta directamente su solubilidad, biodisponibilidad y estabilidad. Polimorfos diferentes del mismo compuesto pueden tener efectos terapéuticos distintos.</li>
-                    <li>• <strong>Bioquímica:</strong> Las estructuras covalentes (como el diamante) y metálicas sirven de modelo para entender las propiedades de biominerales y prótesis.</li>
-                    <li>• <strong>Nutrición y Materiales:</strong> Los sólidos iónicos y su comportamiento en disolución son clave para el balance electrolítico. Los sólidos amorfos son fundamentales en la creación de polímeros para empaques y dispositivos médicos.</li>
+                    <li>• <strong>Farmacia y Bioquímica:</strong> La estructura cristalina de un fármaco determina su solubilidad, velocidad de disolución y biodisponibilidad. Diferentes polimorfos del mismo compuesto pueden tener efectos terapéuticos drásticamente distintos. Además, los sólidos amorfos se utilizan para mejorar la solubilidad de fármacos poco solubles.</li>
+                    <li>• <strong>Biología:</strong> La biomineralización produce cristales iónicos (como hidroxiapatita en huesos y dientes) con propiedades mecánicas excepcionales. La estructura del agua sólida (hielo) es fundamental para la criopreservación de células y tejidos.</li>
+                    <li>• <strong>Nutrición y Dietética:</strong> La estructura física de los alimentos (cristalina vs amorfa) afecta la textura, digestibilidad y estabilidad. La cristalización de grasas (manteca de cacao) y azúcares (lactosa) define la calidad organoléptica de productos lácteos y repostería.</li>
                 </ul>
             </div>
         </div>
@@ -240,21 +231,47 @@
             <div id="sub-general" class="tab-content active">
                 <h3>🪨 Definición y Características Generales</h3>
                 <div class="info-box">
-                    En un sólido, las partículas (moléculas, átomos o iones) se unen con tal rigidez que prácticamente no tienen libertad de movimiento. Las partículas están:
+                    <p>En un sólido, las partículas (moléculas, átomos o iones) se unen con tal rigidez que prácticamente no tienen libertad de movimiento. Las partículas están:</p>
                     <ul>
                         <li><strong>Muy juntas</strong> en disposiciones regulares.</li>
                         <li>Sólo tienen movimiento de <strong>vibración</strong> respecto a un punto fijo.</li>
                         <li>Fuertemente unidas.</li>
+                        <li>Forman generalmente estructuras cristalinas.</li>
                     </ul>
                 </div>
                 <div class="tip-box">
-                    La cantidad de espacio vacío en un sólido es menor que en un líquido; por ello, los sólidos son <strong>incompresibles</strong> y poseen <strong>forma y volumen definido</strong>. Con muy pocas excepciones (como el agua), la densidad de los sólidos es mayor que la de los líquidos.
+                    <p>La cantidad de espacio vacío en un sólido es menor que en un líquido; por ello, los sólidos son <strong>incompresibles</strong> y poseen <strong>forma y volumen definido</strong>. Con muy pocas excepciones (como el agua, donde el sólido es menos denso que el líquido), la densidad de los sólidos es mayor que la de los líquidos para una sustancia dada.</p>
+                </div>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 1: Esquema comparativo de partículas en gas (dispersas), líquido (cercanas con movimiento) y sólido (juntas y vibrando) -->
+                    <img src="estados-comparacion.jpg" alt="Comparación de partículas en estados de la materia" class="molecule-img">
+                    <p class="img-caption">Figura 1: Disposición y movimiento de partículas en los tres estados de la materia.</p>
+                </div>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 2: Acercamiento microscópico de partículas en una red cristalina vibrando en su punto fijo -->
+                    <img src="vibracion-red-cristalina.jpg" alt="Vibración de partículas en una red cristalina" class="molecule-img">
+                    <p class="img-caption">Figura 2: Movimiento vibracional en un sólido cristalino. Las partículas oscilan pero no cambian de posición.</p>
                 </div>
             </div>
 
             <!-- SUB: CLASIFICACIÓN -->
             <div id="sub-clasificacion" class="tab-content">
-                <h3>🔀 Cristalinos vs. Amorfos</h3>
+                <h3>🔀 Clasificación: Cristalinos vs. Amorfos</h3>
+                <div class="info-box">
+                    <p>Las propiedades físicas y estructurales de los sólidos se determinan por los tipos de enlaces que mantienen unidas a sus partículas. Existen dos grandes clases de sólidos:</p>
+                </div>
+                
+                <h3>Sólidos Cristalinos</h3>
+                <p>Los átomos, iones o moléculas se empaquetan en un arreglo ordenado, ocupando posiciones específicas. Pueden ser sólidos covalentes (diamante), moleculares, metálicos e iónicos. Tienen formas geométricas definidas debido a que están ordenados según un patrón tridimensional definido denominado celda unitaria.</p>
+
+                <h3>Sólidos Amorfos</h3>
+                <p>No presentan estructuras ordenadas, carecen de un ordenamiento bien definido. Una consecuencia directa de la disposición irregular es la diferencia de intensidad de las fuerzas intermoleculares, lo que hace que un sólido amorfo <strong>no tenga un punto de fusión definido</strong>, sino que dicha transformación acontece en un intervalo de temperatura. Cuando se calientan, se ablandan progresivamente aumentando su tendencia a deformarse.</p>
+                <ul>
+                    <li>Los óxidos amorfos, gracias a su transparencia y solidez, se emplean como vidrio de ventana.</li>
+                    <li>Ciertos polímeros orgánicos, por su resistencia y peso ligero, se usan como materiales estructurales (plásticos).</li>
+                    <li>Existen semiconductores amorfos empleados en memorias de computadoras.</li>
+                </ul>
+
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -264,32 +281,45 @@
                         </tr>
                         <tr>
                             <td><strong>Ordenamiento</strong></td>
-                            <td>Empaquetado ordenado en arreglo tridimensional (celda unitaria).</td>
-                            <td>Disposición irregular, sin ordenamiento bien definido.</td>
+                            <td>Empaquetado ordenado en arreglo tridimensional.</td>
+                            <td>Disposición irregular, sin orden definido.</td>
                         </tr>
                         <tr>
                             <td><strong>Punto de Fusión</strong></td>
                             <td>Preciso y bien definido.</td>
-                            <td>No definido; se ablandan progresivamente en un intervalo de temperatura.</td>
+                            <td>Intervalo de temperatura (se ablanda).</td>
                         </tr>
                         <tr>
                             <td><strong>Ejemplos</strong></td>
                             <td>NaCl, Diamante, Cuarzo, Metales.</td>
-                            <td>Vidrio (óxidos amorfos), Plásticos (polímeros), Semiconductores amorfos.</td>
+                            <td>Vidrio, Plásticos, Polímeros.</td>
                         </tr>
                     </table>
                 </div>
-                <div class="info-box">
-                    Las propiedades físicas y estructurales de los sólidos se determinan por los tipos de enlaces que mantienen unidas a sus partículas.
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 3: Diferencia visual entre estructura cristalina ordenada y estructura amorfa desordenada -->
+                    <img src="cristalino-vs-amorfo-estructura.jpg" alt="Estructura cristalina vs amorfa" class="molecule-img">
+                    <p class="img-caption">Figura 3: A la izquierda, red cristalina ordenada. A la derecha, estructura amorfa sin patrón geométrico.</p>
+                </div>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 4: Curva de calentamiento mostrando un punto de fusión agudo (cristalino) vs una zona de ablandamiento (amorfo) -->
+                    <img src="curva-fusion-amorfo-cristalino.jpg" alt="Curva de calentamiento de sólidos" class="molecule-img">
+                    <p class="img-caption">Figura 4: Comportamiento térmico. El cristalino funde a temperatura constante; el amorfo se ablanda gradualmente.</p>
                 </div>
             </div>
 
             <!-- SUB: REDES -->
             <div id="sub-redes" class="tab-content">
-                <h3>🕸️ Sistemas Cristalinos y Redes de Bravais</h3>
+                <h3>🕸️ Sistemas Cristalinos - Redes de Bravais</h3>
                 <div class="info-box">
-                    Los cristales tienen formas geométricas definidas porque sus átomos o iones están ordenados según un patrón tridimensional denominado <strong>celda unitaria</strong>. Mediante la técnica de <strong>difracción de Rayos X</strong>, se obtiene información sobre las dimensiones y forma de la celda.
+                    <p>Mediante la técnica de <strong>difracción de Rayos X</strong>, se puede obtener información básica sobre las dimensiones y la forma geométrica de la celda unidad. La <strong>celda unitaria</strong> es la unidad estructural más pequeña que, repetida en las tres dimensiones del espacio, nos genera el cristal (red cristalina).</p>
                 </div>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 5: Ilustración de una celda unitaria mostrando los ejes a, b, c y los ángulos alfa, beta, gamma -->
+                    <img src="celda-unitaria-ejes-angulos.jpg" alt="Celda unitaria ejes y angulos" class="molecule-img">
+                    <p class="img-caption">Figura 5: Celda unitaria genérica mostrando los ejes ($a, b, c$) y ángulos ($\alpha, \beta, \gamma$).</p>
+                </div>
+
                 <h3>Los 7 Sistemas Cristalinos</h3>
                 <div class="table-responsive">
                     <table>
@@ -307,8 +337,9 @@
                         <tr><td>Romboédrico</td><td>$a = b = c$</td><td>$\alpha = \beta = \gamma \neq 90^\circ$</td></tr>
                     </table>
                 </div>
+
                 <div class="tip-box">
-                    <strong>Tipos de Celdas (Redes de Bravais):</strong>
+                    <strong>Tipos de Redes de Bravais:</strong>
                     <ul>
                         <li><strong>P</strong> = Primitiva</li>
                         <li><strong>I</strong> = Centrada en el interior (Cuerpo)</li>
@@ -316,15 +347,26 @@
                         <li><strong>F</strong> = Centrada en todas las caras</li>
                     </ul>
                 </div>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 6: Esquema de los 14 tipos de redes de Bravais agrupados por sistema cristalino -->
+                    <img src="redes-de-bravais-14.jpg" alt="14 Redes de Bravais" class="molecule-img">
+                    <p class="img-caption">Figura 6: Las 14 redes de Bravais posibles en el espacio tridimensional.</p>
+                </div>
+
+                <h3>🧮 Cálculo del número de partículas en la celda unitaria</h3>
                 <div class="problem-box">
-                    <strong>Cálculo de partículas en la celda unitaria:</strong><br>
-                    Para calcular el número de iones en la celda del $NaCl$ o el $Na_2O$, se debe considerar la fracción de cada partícula dentro de la celda:
+                    <p>Para calcular el número de iones en celdas como el $NaCl$ o el $Na_2O$, se considera qué fracción de cada partícula está dentro de los límites de la celda:</p>
                     <ul>
-                        <li>Esquina: compartida por 8 celdas $\rightarrow$ $1/8$ átomo</li>
-                        <li>Arista: compartida por 4 celdas $\rightarrow$ $1/4$ átomo</li>
-                        <li>Cara: compartida por 2 celdas $\rightarrow$ $1/2$ átomo</li>
-                        <li>Centro: pertenece solo a 1 celda $\rightarrow$ $1$ átomo</li>
+                        <li><strong>Esquina:</strong> compartida por 8 celdas $\rightarrow$ $1/8$ átomo</li>
+                        <li><strong>Arista:</strong> compartida por 4 celdas $\rightarrow$ $1/4$ átomo</li>
+                        <li><strong>Cara:</strong> compartida por 2 celdas $\rightarrow$ $1/2$ átomo</li>
+                        <li><strong>Centro (Interior):</strong> pertenece solo a 1 celda $\rightarrow$ $1$ átomo</li>
                     </ul>
+                </div>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 7: Gráfico mostrando un átomo en esquina, cara, arista y centro, con las fracciones 1/8, 1/2, 1/4 y 1 -->
+                    <img src="aporte-celda-unitaria.jpg" alt="Aporte atomico a la celda unitaria" class="molecule-img">
+                    <p class="img-caption">Figura 7: Fracción de átomo que aporta cada posición geométrica a la celda unitaria.</p>
                 </div>
             </div>
 
@@ -334,21 +376,32 @@
                 <div class="info-box">
                     <ul>
                         <li><strong>Puntos reticulares:</strong> Iones positivos (cationes) y negativos (aniones) de distinto tamaño.</li>
-                        <li><strong>Fuerza de atracción:</strong> Naturaleza electrostática (enlaces iónicos, 50-100 kJ/mol).</li>
-                        <li><strong>Propiedades:</strong> Duros y quebradizos. No conducen en estado sólido, pero sí fundidos o disueltos. Punto de fusión alto. No volátiles.</li>
+                        <li><strong>Fuerza de atracción:</strong> La fuerza que mantiene unidos a los iones es de naturaleza electrostática, formando enlaces iónicos (50-100 kJ/mol).</li>
+                        <li><strong>Propiedades físicas:</strong> Son sólidos duros y quebradizos. No conducen la electricidad en su estructura sólida. Sin embargo, son buenos conductores cuando están fundidos o disueltos en agua. No son volátiles y tienen un punto de fusión alto.</li>
                         <li><strong>Ejemplos:</strong> $NaCl$, $AgCl$, $KCl$, $MgO$.</li>
                     </ul>
                 </div>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 8: Estructura 3D del NaCl mostrando iones alternados -->
+                    <img src="estructura-nacl-3d.jpg" alt="Estructura cristalina del NaCl" class="molecule-img">
+                    <p class="img-caption">Figura 8: Red cristalina del $NaCl$. Iones $Na^+$ (pequeños) rodeados por iones $Cl^-$ (grandes) en estructura octaédrica.</p>
+                </div>
+
                 <h3>🔬 Energía de Red y Ley de Coulomb</h3>
+                <p>Se puede establecer cualitativamente una relación entre los puntos de fusión de los sólidos iónicos teniendo en cuenta las fuerzas de Coulomb:</p>
                 <div class="tip-box">
-                    La relación cualitativa de los puntos de fusión se explica mediante la energía de interacción Coulómbica ($E$):
-                    $$E = K \frac{q_1 q_2}{d}$$                     Donde:
-                    <ul>
+                    $$E = K \frac{q_1 q_2}{d}$$                     <ul>
+                        <li>$E$: Energía de interacción Coulómbica</li>
                         <li>$K$: Constante ($8.99 \times 10^9 \text{ J-m/C}^2$)</li>
-                        <li>$q_1, q_2$: Cargas de los iones</li>
-                        <li>$d$: Distancia entre iones (radios iónicos)</li>
+                        <li>$q_1, q_2$: Cargas de los iones del retículo</li>
+                        <li>$d$: Distancia entre iones (suma de radios iónicos)</li>
                     </ul>
-                    <strong>Conclusión:</strong> La energía de red <strong>aumenta</strong> (mayor fuerza) conforme aumentan las cargas de los iones y conforme disminuyen sus radios.
+                </div>
+                <p>La magnitud de la energía de red de un sólido iónico depende de la carga de los iones. Por consecuencia, la energía de red aumenta conforme aumentan las cargas de los iones y conforme disminuyen sus radios (menor distancia $d$).</p>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 9: Gráfica de barras comparando energías de red de NaCl vs MgO para visualizar el efecto de la carga -->
+                    <img src="energia-red-comparacion.jpg" alt="Comparacion de energia de red" class="molecule-img">
+                    <p class="img-caption">Figura 9: Mayor carga iónica ($Mg^{2+}O^{2-}$ vs $Na^+Cl^-$) resulta en mayor energía de red y punto de fusión.</p>
                 </div>
             </div>
 
@@ -356,19 +409,31 @@
             <div id="sub-metalicos" class="tab-content">
                 <h3>⚙️ Cristales Metálicos</h3>
                 <div class="info-box">
-                    El enlace metálico se considera como una estructura de iones positivos inmersos en un <strong>"mar de electrones de valencia deslocalizados"</strong>.
+                    <p>El enlace en los metales es muy diferente al de otros tipos de cristales. Se puede considerar como una estructura de iones positivos inmersos en un <strong>mar de electrones de valencia deslocalizados</strong>. La gran fuerza cohesiva resultante de la deslocalización es la responsable de la resistencia mecánica de los metales.</p>
+                    <p>La gran movilidad de los electrones deslocalizados explica que los metales sean buenos conductores del calor y la electricidad.</p>
+                </div>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 10: Modelo del mar de electrones mostrando cationes metálicos en una nube de electrones -->
+                    <img src="modelo-mar-de-electrones.jpg" alt="Modelo del mar de electrones" class="molecule-img">
+                    <p class="img-caption">Figura 10: Modelo de "mar de electrones". Cationes rodeados de electrones deslocalizados que fluyen.</p>
                 </div>
                 <div class="tip-box">
-                    <strong>Propiedades de los Metales:</strong>
+                    <strong>Propiedades de los Cristales Metálicos:</strong>
                     <ul>
-                        <li>La gran movilidad de los electrones explica que sean buenos conductores de calor y electricidad.</li>
+                        <li>Desde suaves (blandos) hasta muy duros.</li>
+                        <li>Bajo a altos punto de fusión: desde $-39^\circ$C (Hg) hasta $3419^\circ$C (W).</li>
+                        <li>Buenos conductores del calor y de la electricidad (electrones móviles).</li>
                         <li>Dúctiles (cables) y maleables (láminas).</li>
-                        <li>Tienen brillo (reflejan la luz).</li>
-                        <li>Desde blandos hasta muy duros; bajo a alto punto de fusión ($-39^\circ$C Hg hasta $3419^\circ$C W).</li>
+                        <li>Brillo (reflejan la luz).</li>
                     </ul>
                 </div>
                 <div class="pharma-box">
-                    <strong>Excepción notoria:</strong> El único metal líquido a temperatura ambiente es el <strong>Mercurio (Hg)</strong>, el cual puede disolver a otros metales formando disoluciones llamadas <em>amalgamas</em> (usadas históricamente en odontología).
+                    <strong>Excepción notoria:</strong> El único metal líquido es el Mercurio (Hg), que disuelve a otros metales formando disoluciones llamadas <strong>amalgamas</strong>.
+                </div>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 11: Imagen mostrando la ductilidad y maleabilidad a nivel atómico (planos de cationes deslizándose) -->
+                    <img src="ductilidad-maleabilidad-atomos.jpg" alt="Deslizamiento de planos atomicos en metales" class="molecule-img">
+                    <p class="img-caption">Figura 11: Los planos de cationes pueden deslizarse sin romper el enlace gracias al mar de electrones, permitiendo ductilidad.</p>
                 </div>
             </div>
 
@@ -377,14 +442,23 @@
                 <h3>💎 Cristales Covalentes (Red Covalente)</h3>
                 <div class="info-box">
                     <ul>
-                        <li><strong>Unidades reticulares:</strong> Átomos.</li>
-                        <li><strong>Cohesión:</strong> Únicamente enlaces covalentes (100-1000 kJ/mol).</li>
-                        <li><strong>Propiedades:</strong> Muy duros. Puntos de fusión elevados ($\approx 1000^\circ$C). Malos conductores. Insolubles en disolventes comunes.</li>
-                        <li><strong>Ejemplos:</strong> Diamante, Cuarzo ($SiO_2$), Silicatos.</li>
+                        <li><strong>Unidades en los puntos reticulares:</strong> Átomos.</li>
+                        <li><strong>Cohesión cristalina:</strong> Se debe únicamente a enlaces covalentes (100-1000 kJ/mol).</li>
+                        <li><strong>Propiedades:</strong> Malos conductores eléctricos y térmicos. Muy duros. Puntos de fusión muy elevados ($\approx 1000^\circ$C). Insolubles en todos los disolventes comunes.</li>
+                        <li><strong>Ejemplos comunes:</strong> Diamante, Cuarzo, Silicatos ($SiO_2$, $SiO_3^{2-}$, $Si_4O_{10}^{4-}$).</li>
                     </ul>
                 </div>
-                <div class="bio-box">
-                    <strong>El Diamante:</strong> Cada átomo de carbono está enlazado a 4 átomos más de carbono. La fuerza del enlace covalente tridimensional contribuye a su extrema dureza característica.
+                <h3>El Diamante</h3>
+                <p>En el diamante, cada átomo de carbono está enlazado covalentemente a 4 átomos de carbono en una estructura tetraédrica tridimensional. La fuerza del enlace covalente en 3D contribuye con la dureza característica del diamante.</p>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 12: Estructura tetraédrica 3D del diamante -->
+                    <img src="red-diamante-3d.jpg" alt="Estructura cristalina del diamante" class="molecule-img">
+                    <p class="img-caption">Figura 12: Red covalente del diamante. Cada carbono forma 4 enlaces covalentes perfectos.</p>
+                </div>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 13: Estructura del cuarzo (SiO2) mostrando la red tridimensional -->
+                    <img src="red-cuarzo-sio2.jpg" alt="Estructura cristalina del cuarzo SiO2" class="molecule-img">
+                    <p class="img-caption">Figura 13: Red covalente del Cuarzo ($SiO_2$), alternando Silicio y Oxígeno.</p>
                 </div>
             </div>
 
@@ -393,20 +467,30 @@
                 <h3>🧊 Cristales Moleculares</h3>
                 <div class="info-box">
                     <ul>
-                        <li><strong>Unidades reticulares:</strong> Moléculas.</li>
-                        <li><strong>Fuerzas de atracción:</strong> Dispersión de London, Dipolo-dipolo, Puentes de Hidrógeno (1-15 kJ/mol).</li>
-                        <li><strong>Propiedades:</strong> No conducen electricidad. Puntos de fusión bajos a moderados. Se rompen fácilmente.</li>
+                        <li><strong>Unidades en los puntos reticulares:</strong> Moléculas.</li>
+                        <li><strong>Fuerzas de atracción entre moléculas:</strong> Dispersión de London, Dipolo-dipolo, Puentes de hidrógeno (1-15 kJ/mol).</li>
+                        <li><strong>Propiedades:</strong> No conducen la electricidad en estado puro. Puntos de ebullición y de fusión bajos a moderadamente altos.</li>
+                        <li><strong>Solubilidad:</strong> Los compuestos no polares ($CO_2$, $AlCl_3$) son insolubles en agua, pero solubles en disolventes no polares ($CCl_4$, benceno). Son solubles en agua los compuestos polares (ej. lactosa).</li>
                     </ul>
+                </div>
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 14: Cristal molecular de hielo mostrando puentes de hidrógeno -->
+                    <img src="cristal-hielo-puentes.jpg" alt="Cristal molecular de hielo" class="molecule-img">
+                    <p class="img-caption">Figura 14: Cristal molecular de hielo. Las moléculas de $H_2O$ se mantienen unidas por puentes de hidrógeno.</p>
                 </div>
                 <div class="tip-box">
-                    <strong>Solubilidad:</strong>
+                    <strong>Propiedades de los cristales moleculares:</strong>
                     <ul>
-                        <li>Compuestos polares (ej. lactosa) son solubles en agua.</li>
-                        <li>Compuestos apolares (ej. $CO_2$, $AlCl_3$) son insolubles en agua pero solubles en disolventes no polares (ej. $CCl_4$, benceno).</li>
+                        <li>Las fuerzas intermoleculares son menos fuertes que las uniones covalentes o iónicas, por lo que los cristales moleculares son en general débiles en comparación con los cristales iónicos y covalentes.</li>
+                        <li>La mayoría de cristales moleculares funden a temperaturas menores de 300 °C.</li>
+                        <li>Los cristales moleculares se rompen más fácilmente.</li>
+                        <li>Son malos conductores de calor y la electricidad.</li>
                     </ul>
                 </div>
-                <div class="problem-box">
-                    <strong>Ejemplo Clásico:</strong> El hielo ($H_2O$ sólida). Las fuerzas intermoleculares (puentes de hidrógeno) mantienen las moléculas separadas en una estructura cristalina hexagonal que es menos densa que el agua líquida.
+                <div class="img-container">
+                    <!-- IMAGEN SOLICITADA 15: Comparación entre hielo seco (CO2) con fuerzas de London vs Hielo de agua con puentes de Hidrógeno -->
+                    <img src="comparacion-molecular.jpg" alt="Comparacion cristal molecular polar y apolar" class="molecule-img">
+                    <p class="img-caption">Figura 15: Diferencia en fuerzas intermoleculares. Izq: Hielo seco ($CO_2$, London). Der: Hielo de agua ($H_2O$, Puente de H).</p>
                 </div>
             </div>
         </div>
@@ -488,82 +572,101 @@
     </div>
 </section>
 
-<!-- ============ HERRAMIENTAS / CALCULADORAS ============ -->
+<!-- ============ HERRAMIENTAS ============ -->
 <section id="calculadoras" class="section">
     <div class="card">
-        <h2>🧮 Herramientas: Celda Unitaria</h2>
+        <h2>🧮 Herramientas Interactivas</h2>
         <div id="herramientas-tabs" class="tab-group">
             <div class="tabs">
-                <button class="tab active" onclick="showTab('herramientas-tabs','calc-particulas', this)">⚛️ Cálculo de Partículas</button>
+                <button class="tab active" onclick="showTab('herramientas-tabs','calc-particulas', this)">⚛️ Calc. Partículas</button>
                 <button class="tab" onclick="showTab('herramientas-tabs','calc-coulomb', this)">⚡ Ley de Coulomb</button>
+                <button class="tab" onclick="showTab('herramientas-tabs','tool-visual', this)">👁️ Visualizador de Celda</button>
             </div>
 
-            <!-- CALC 1: PARTICULAS -->
             <div id="calc-particulas" class="tab-content active">
                 <div class="calculator">
                     <div class="calc-title">⚛️ Calculadora de Partículas en Celda Unitaria</div>
-                    <p style="margin-bottom:1rem;">Calcula cuántos átomos pertenecen realmente a una celda unitaria según su posición.</p>
-                    <div class="calc-input-group">
-                        <label>Número de átomos en las esquinas (típicamente 8):</label>
-                        <input type="number" id="uc-esquinas" value="8">
-                    </div>
-                    <div class="calc-input-group">
-                        <label>Número de átomos en las caras (0, 2 o 6):</label>
-                        <input type="number" id="uc-caras" value="6">
-                    </div>
-                    <div class="calc-input-group">
-                        <label>Número de átomos en las aristas (0 a 12):</label>
-                        <input type="number" id="uc-aristas" value="0">
-                    </div>
-                    <div class="calc-input-group">
-                        <label>Número de átomos en el centro (0 o 1):</label>
-                        <input type="number" id="uc-centro" value="0">
-                    </div>
+                    <div class="calc-input-group"><label>Átomos en esquinas (0-8):</label><input type="number" id="uc-esquinas" value="8"></div>
+                    <div class="calc-input-group"><label>Átomos en caras (0-6):</label><input type="number" id="uc-caras" value="6"></div>
+                    <div class="calc-input-group"><label>Átomos en aristas (0-12):</label><input type="number" id="uc-aristas" value="0"></div>
+                    <div class="calc-input-group"><label>Átomos en centro (0-1):</label><input type="number" id="uc-centro" value="0"></div>
                     <button class="calc-button" onclick="calcularParticulas()">Calcular Átomos Totales</button>
                     <div id="uc-result" class="calc-result"></div>
                 </div>
             </div>
 
-            <!-- CALC 2: COULOMB -->
             <div id="calc-coulomb" class="tab-content">
                 <div class="calculator">
                     <div class="calc-title">⚡ Energía de Interacción Coulómbica</div>
-                    <p style="margin-bottom:1rem;">Fórmula: $E = K \frac{q_1 q_2}{d}$</p>
-                    <div class="calc-input-group">
-                        <label>Carga ion 1 ($q_1$) en unidades de carga elemental ($+1, +2, -1$):</label>
-                        <input type="number" id="q1" value="1">
-                    </div>
-                    <div class="calc-input-group">
-                        <label>Carga ion 2 ($q_2$) en unidades de carga elemental:</label>
-                        <input type="number" id="q2" value="-1">
-                    </div>
-                    <div class="calc-input-group">
-                        <label>Distancia entre iones ($d$) en nm:</label>
-                        <input type="number" id="d-ion" value="0.276" step="0.001">
-                    </div>
+                    <p>Fórmula: $E = K \frac{q_1 q_2}{d}$</p>
+                    <div class="calc-input-group"><label>Carga ion 1 ($q_1$, ej: +1, +2):</label><input type="number" id="q1" value="1"></div>
+                    <div class="calc-input-group"><label>Carga ion 2 ($q_2$, ej: -1, -2):</label><input type="number" id="q2" value="-1"></div>
+                    <div class="calc-input-group"><label>Distancia ($d$) en nm:</label><input type="number" id="d-ion" value="0.276" step="0.001"></div>
                     <button class="calc-button" onclick="calcularCoulomb()">Calcular Energía (kJ/mol)</button>
                     <div id="cc-result" class="calc-result"></div>
+                </div>
+            </div>
+
+            <div id="tool-visual" class="tab-content">
+                <div class="calculator">
+                    <div class="calc-title">👁️ Visualizador Interactivo de Aportes</div>
+                    <p>Haz clic en la posición del átomo para ver qué fracción de él pertenece a la celda unitaria.</p>
+                    <div class="interactive-cell-box">
+                        <button class="interactive-btn" onclick="showFraction('Esquina', 8, '1/8')">🟢 Esquina</button>
+                        <button class="interactive-btn" onclick="showFraction('Cara', 2, '1/2')">🔵 Cara</button>
+                        <button class="interactive-btn" onclick="showFraction('Arista', 4, '1/4')">🟠 Arista</button>
+                        <button class="interactive-btn" onclick="showFraction('Centro', 1, '1')">🔴 Centro</button>
+                    </div>
+                    <div id="visual-result" class="calc-result"></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ============ APLICACIONES PROFESIONALES ============ -->
+<!-- ============ APLICACIONES ============ -->
 <section id="aplicaciones" class="section">
     <div class="card">
-        <h2>🏥 Aplicaciones Profesionales</h2>
-        <div class="bio-box">
-            <strong>💊 Polimorfismo Farmacéutico:</strong> Muchos fármacos forman cristales con estructuras diferentes (polimorfos). Por ejemplo, el paracetamol tiene formas monoclínicas y ortorrómbicas, las cuales presentan diferentes solubilidades y velocidades de absorción en el cuerpo.
-        </div>
-        <div class="pharma-box">
-            <strong>🦷 Amalgamas Dentales:</strong> Los cristales metálicos líquidos como el Mercurio (Hg) disuelven otros metales sólidos (Ag, Sn, Cu) formando amalgamas. Esta propiedad fue clave en odontología para crear empastes maleables que luego se endurecían.
-        </div>
-        <div class="info-box">
-            <strong>🛡️ Materiales Biocompatibles:</strong> El titanio forma cristales metálicos con alta resistencia, ligereza y capacidad de osointegración, convirtiéndolo en el material ideal para prótesis articulares e implantes dentales.
-        </div>
-        <div class="tip-box">
-            <strong>💉 Vidrios Médicos (Sólidos Amorfos):</strong> Los sólidos amorfos, gracias a su transparencia y ausencia de un punto de fusión brusco, permiten la fabricación de jeringas, ampollas y fibras ópticas médicas.
+        <h2>🏥 Aplicaciones Profesionales Específicas</h2>
+        <div id="aplicaciones-tabs" class="tab-group">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('aplicaciones-tabs','aplic-farma', this)">💊 Farmacia y Bioquímica</button>
+                <button class="tab" onclick="showTab('aplicaciones-tabs','aplic-bio', this)">🧬 Biología</button>
+                <button class="tab" onclick="showTab('aplicaciones-tabs','aplic-nutri', this)">🥗 Nutrición y Dietética</button>
+            </div>
+            <div id="aplic-farma" class="tab-content active">
+                <div class="pharma-box">
+                    <strong>1. Polimorfismo Farmacéutico:</strong> Un mismo fármaco puede cristalizar en diferentes estructuras (polimorfos). El Ritonavir (antirretroviral) tuvo que retirarse del mercado porque apareció un polimorfo nuevo que era insoluble e inactivo, arruinando la biodisponibilidad del medicamento.
+                </div>
+                <div class="pharma-box">
+                    <strong>2. Formas de Sales vs Formas Libres:</strong> Los fármacos iónicos (como el ibuprofeno sódico vs el ibuprofeno ácido) presentan截然as solubilidades. La forma sódica (cristal iónico) se disuelve mucho más rápido, ideal para acción rápida, mientras que la forma ácida (cristal molecular) es más lenta, ideal para acción sostenida.
+                </div>
+                <div class="pharma-box">
+                    <strong>3. Dispersiones Sólidas Amorfas:</strong> Para mejorar la solubilidad de fármacos pobres en agua, se les atrapa en una matriz polimérica amorfa (ej. con PVP). Al no tener estructura cristalina rígida, la energía de red es menor y el fármaco se libera y disuelve mucho más rápido en el tracto gastrointestinal.
+                </div>
+            </div>
+            <div id="aplic-bio" class="tab-content">
+                <div class="bio-box">
+                    <strong>1. Biomineralización Ósea:</strong> Los huesos y dientes están compuestos por Hidroxiapatita (un cristal iónico de calcio y fosfato, $Ca_{10}(PO_4)_6(OH)_2$). La estructura cristalina ordenada permite que el colágeno se adhiera, dando al tejido una combinación perfecta de rigidez (cristal) y elasticidad (colágeno).
+                </div>
+                <div class="bio-box">
+                    <strong>2. Cristalografía de Proteínas:</strong> Para entender cómo funcionan las enzimas y diseñar fármacos, los bioquímicos cristalizan proteínas (sólidos moleculares) y las analizan mediante difracción de Rayos X, revelando la estructura tridimensional exacta de los sitios activos.
+                </div>
+                <div class="bio-box">
+                    <strong>3. Exoesqueletos y Conchas:</strong> Los crustáceos y moluscos utilizan el carbonato de calcio ($CaCO_3$) para formar sus conchas. Dependiendo de cómo lo cristalicen (calcita vs aragonito), obtienen materiales con diferentes durezas y propiedades mecánicas para defensa.
+                </div>
+            </div>
+            <div id="aplic-nutri" class="tab-content">
+                <div class="info-box">
+                    <strong>1. Templado del Chocolate:</strong> La manteca de cacao puede cristalizar en 6 polimorfos distintos. El cristal "Tipo V" es el ideal para el chocolate: brillante, quebradizo al morder y funde a 34°C (temperatura de la boca). El proceso de "templado" busca generar esta red cristalina específica.
+                </div>
+                <div class="info-box">
+                    <strong>2. Cristalización de la Lactosa:</strong> En la industria láctea, si la lactosa cristaliza como monohidrato (cristal molecular grande), genera una textura arenosa indeseada en helados o leches condensadas. Se controla el enfriamiento para mantenerla amorfa o en microcristales imperceptibles.
+                </div>
+                <div class="info-box">
+                    <strong>3. Retrogradación del Almidón:</strong> El almidón en el pan recién horneado está en estado amorfo (suave). Con el paso de los días, las moléculas de amilosa y amilopectina se reorganizan lentamente en estructuras cristalinas moleculares, causando el endurecimiento del pan (envejecimiento).
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -571,24 +674,27 @@
 <!-- ============ MNEMOTECNIAS ============ -->
 <section id="mnemotecnias" class="section">
     <div class="card">
-        <h2>🧠 Reglas Mnemotécnicas</h2>
+        <h2>🧠 Reglas Mnemotécnicas y Carga Cognitiva</h2>
         <div class="mnemonic-card">
-            <div class="mnemonic-title">💍 Regla del "FON" para Puentes de Hidrógeno</div>
-            <p>Para recordar qué átomos unidos al Hidrógeno generan cristales moleculares fuertes (como el hielo), recuerda la palabra <strong>FON</strong>:</p>
+            <div class="mnemonic-title">⚖️ Ley de Coulomb: "Q-Q sobre D"</div>
+            <p>Para recordar la fórmula de energía iónica $E = K \frac{q_1 q_2}{d}$, usa la frase: <strong>"Kilos de Queso 1 y Queso 2 sobre la Distancia"</strong>. Recuerda que si las cargas crecen, la energía sube; si la distancia crece, la energía baja.</p>
+        </div>
+        <div class="mnemonic-card">
+            <div class="mnemonic-title">🧊 Empaquetamiento Atómico: "1-2-4-8 Inverso"</div>
+            <p>El error común es no saber qué fracción de átomo aporta cada posición. Recuerda que el átomo central es <strong>1</strong> (entero). De ahí, el número de celdas que comparten el átomo es la inversa de la secuencia 2, 4, 8:</p>
             <ul>
-                <li><strong>F</strong>lúor</li>
-                <li><strong>O</strong>xígeno</li>
-                <li><strong>N</strong>itrógeno</li>
+                <li>Cara: comparte con 2 celdas $\rightarrow$ <strong>1/2</strong></li>
+                <li>Arista: comparte con 4 celdas $\rightarrow$ <strong>1/4</strong></li>
+                <li>Esquina: comparte con 8 celdas $\rightarrow$ <strong>1/8</strong></li>
             </ul>
         </div>
         <div class="mnemonic-card">
-            <div class="mnemonic-title">⚖️ Proporciones de la Celda Unitaria</div>
-            <p>Para recordar cuánto contribuye un átomo a la celda según su posición, usa la regla <strong>"1-2-4-8"</strong> inversamente:</p>
+            <div class="mnemonic-title">📐 Regla de los 7 Sistemas de Bravais</div>
+            <p>Para recordar que existen 7 sistemas y 14 redes de Bravais, usa la regla del "3-3-1" para los ángulos de 90°:</p>
             <ul>
-                <li>El átomo del centro es <strong>1</strong> (entero).</li>
-                <li>El átomo de cara comparte con 2 celdas $\rightarrow$ <strong>1/2</strong>.</li>
-                <li>El átomo de arista comparte con 4 celdas $\rightarrow$ <strong>1/4</strong>.</li>
-                <li>El átomo de esquina comparte con 8 celdas $\rightarrow$ <strong>1/8</strong>.</li>
+                <li><strong>3 sistemas</strong> con todos los ángulos a 90° (Cúbico, Tetragonal, Ortorrómbico).</li>
+                <li><strong>3 sistemas</strong> que rompen la regla de 90° (Monoclínico rompe 1, Triclínico rompe todos, Romboédrico rompe los 3 igualmente).</li>
+                <li><strong>1 sistema</strong> especial (Hexagonal con su $\gamma = 120^\circ$).</li>
             </ul>
         </div>
     </div>
@@ -598,30 +704,16 @@
 <section id="glosario" class="section">
     <div class="card">
         <h2>📖 Glosario Técnico</h2>
-        <div class="glossary-term" onclick="toggleGlossary(this)">
-            <strong>Celda Unitaria</strong>
-            <div class="glossary-definition">
-                La unidad estructural más pequeña de un cristal que, repetida en las tres dimensiones del espacio, genera la red cristalina completa.
-            </div>
-        </div>
-        <div class="glossary-term" onclick="toggleGlossary(this)">
-            <strong>Sólido Amorfo</strong>
-            <div class="glossary-definition">
-                Sólido que carece de un ordenamiento geométrico bien definido. Sus partículas poseen disposiciones irregulares, por lo que no tienen un punto de fusión preciso.
-            </div>
-        </div>
-        <div class="glossary-term" onclick="toggleGlossary(this)">
-            <strong>Energía de Red</strong>
-            <div class="glossary-definition">
-                La energía requerida para separar completamente un mol de un compuesto iónico sólido en sus iones gaseosos. Depende de las cargas iónicas y la distancia interiónica (Ley de Coulomb).
-            </div>
-        </div>
-        <div class="glossary-term" onclick="toggleGlossary(this)">
-            <strong>Deslocalización Electrónica</strong>
-            <div class="glossary-definition">
-                Concepto clave en cristales metálicos donde los electrones de valencia no pertenecen a un átomo específico, sino que se mueven libremente a través de toda la estructura ("mar de electrones").
-            </div>
-        </div>
+        <div class="glossary-term" onclick="toggleGlossary(this)"><strong>Celda Unitaria</strong><div class="glossary-definition">La unidad estructural más pequeña de un cristal que, repetida en las tres dimensiones del espacio, genera la red cristalina completa.</div></div>
+        <div class="glossary-term" onclick="toggleGlossary(this)"><strong>Sólido Amorfo</strong><div class="glossary-definition">Sólido que carece de un ordenamiento geométrico bien definido. Sus partículas poseen disposiciones irregulares, por lo que no tienen un punto de fusión preciso.</div></div>
+        <div class="glossary-term" onclick="toggleGlossary(this)"><strong>Energía de Red</strong><div class="glossary-definition">La energía requerida para separar completamente un mol de un compuesto iónico sólido en sus iones gaseosos. Depende de las cargas iónicas y la distancia interiónica (Ley de Coulomb).</div></div>
+        <div class="glossary-term" onclick="toggleGlossary(this)"><strong>Deslocalización Electrónica</strong><div class="glossary-definition">Concepto clave en cristales metálicos donde los electrones de valencia no pertenecen a un átomo específico, sino que se mueven libremente a través de toda la estructura.</div></div>
+        <div class="glossary-term" onclick="toggleGlossary(this)"><strong>Red de Bravais</strong><div class="glossary-definition">Conjunto de 14 arreglos geométricos tridimensionales posibles en los que pueden distribuirse los puntos de una red cristalina. Incluye celdas primitivas (P), centradas en el cuerpo (I), centradas en caras (F) y centradas en base (C).</div></div>
+        <div class="glossary-term" onclick="toggleGlossary(this)"><strong>Polimorfismo</strong><div class="glossary-definition">Propiedad de algunas sustancias de cristalizar en diferentes estructuras cristalinas bajo distintas condiciones de presión o temperatura (ej. diamante vs grafito).</div></div>
+        <div class="glossary-term" onclick="toggleGlossary(this)"><strong>Punto Reticular</strong><div class="glossary-definition">Cada uno de los puntos que forman la red cristalina y que representan la posición de un átomo, ion o molécula en la estructura.</div></div>
+        <div class="glossary-term" onclick="toggleGlossary(this)"><strong>Maleabilidad y Ductilidad</strong><div class="glossary-definition">Propiedades de los cristales metálicos. Maleabilidad es la capacidad de formar láminas delgadas; ductilidad es la capacidad de formar hilos. Se deben al "mar de electrones" que permite que los iones deslicen sin romper la estructura.</div></div>
+        <div class="glossary-term" onclick="toggleGlossary(this)"><strong>Fuerzas de London</strong><div class="glossary-definition">Fuerzas de dispersión presentes en todas las moléculas. Son el único tipo de fuerza intermolecular en sólidos moleculares apolares (como el hielo seco $CO_2$).</div></div>
+        <div class="glossary-term" onclick="toggleGlossary(this)"><strong>Difracción de Rayos X</strong><div class="glossary-definition">Técnica analítica que permite determinar la estructura interna de un cristal midiendo los ángulos e intensidades de los rayos X difractados por su red atómica.</div></div>
     </div>
 </section>
 
@@ -631,18 +723,13 @@
         <h2>⚠️ Errores Comunes</h2>
         <div class="error-card">
             <div class="error-title">Error: "Los sólidos iónicos no conducen electricidad"</div>
-            <p>Es una afirmación a medias. Es cierto que en su estado sólido rígido los iones no pueden moverse, por lo que no conducen. Sin embargo, al fundirlos o disolverlos en agua, los iones quedan libres y se convierten en excelentes conductores.</p>
+            <p>Es una afirmación a medias. En estado sólido los iones están fijos y no conducen. Sin embargo, al fundirlos o disolverlos, los iones quedan libres y se convierten en excelentes conductores.</p>
             <div class="correction"><strong>Corrección:</strong> Los sólidos iónicos conducen electricidad únicamente en estado fundido o en disolución acuosa.</div>
         </div>
         <div class="error-card">
             <div class="error-title">Error: Confundir red covalente con molécula covalente</div>
-            <p>El diamante ($C$) y el cuarzo ($SiO_2$) no son moléculas individuales gigantes, sino <strong>redes covalentes tridimensionales</strong> donde el enlace se extiende infinitamente. La glucosa ($C_6H_{12}O_6$), por el contrario, sí es una molécula covalente discreta.</p>
-            <div class="correction"><strong>Corrección:</strong> Diferencia entre sólido de red covalente (enlaces infinitos, duros, alto P.F.) y sólido molecular (moléculas discretas, fuerzas intermoleculares débiles).</div>
-        </div>
-        <div class="error-card">
-            <div class="error-title">Error: Calcular mal los átomos en una celda centrada en caras (F)</div>
-            <p>Asumir que los 8 átomos de las esquinas cuentan como 8 átomos completos.</p>
-            <div class="correction"><strong>Corrección:</strong> En una celda cúbica centrada en caras (FCC), los átomos de las esquinas aportan $8 \times (1/8) = 1$ átomo, y los de las caras $6 \times (1/2) = 3$ átomos. Total: <strong>4 átomos</strong> por celda.</div>
+            <p>El diamante ($C$) y el cuarzo ($SiO_2$) no son moléculas gigantes, sino redes covalenas infinitas. La glucosa ($C_6H_{12}O_6$) sí es una molécula discreta.</p>
+            <div class="correction"><strong>Corrección:</strong> Diferencia entre sólido de red covalente (enlaces infinitos, muy duros) y sólido molecular (moléculas discretas unidas por fuerzas intermoleculares).</div>
         </div>
     </div>
 </section>
@@ -650,11 +737,11 @@
 <!-- ============ BIBLIOGRAFIA ============ -->
 <section id="bibliografia" class="section">
     <div class="card">
-        <h2>📚 Bibliografía</h2>
+        <h2>📚 Bibliografía Específica</h2>
         <ul>
-            <li>Chang, R., Goldsby, K. A. (2017). <em>Química</em>. McGraw-Hill. <a href="https://ebooks7-24.com:443/?il=5202" target="_blank">Link</a></li>
-            <li>Brown, T. L., LeMay, H. E., Bursten, B. E., Murphy, C. J., Woodward, P. M., Stoltzfus, M. W. (2021). <em>Química</em>. Pearson Educación. <a href="https://ebooks7-24.com:443/?il=16937" target="_blank">Link</a></li>
-            <li>Whitten, K. W., Peck, M. L., Stanley, G. G., Davis, R. E. (2015). <em>Química</em>. Cengage Learning. <a href="https://ebooks7-24.com:443/?il=1304" target="_blank">Link</a></li>
+            <li>Chang, R., Goldsby, K. A. (2017). <em>Química</em> (12ª ed.). McGraw-Hill. <strong>Capítulo 11: Líquidos y Sólidos</strong>. Secciones 11.4 a 11.7 (Estructura de los sólidos, Tipos de cristales). Pp. 485-510. <a href="https://ebooks7-24.com:443/?il=5202" target="_blank">Acceder</a></li>
+            <li>Brown, T. L., et al. (2021). <em>Química: La ciencia central</em> (15ª ed.). Pearson. <strong>Capítulo 12: Sólidos y materiales modernos</strong>. Secciones 12.1 a 12.5 (Clasificación de sólidos, Estructuras cristalinas). Pp. 524-555. <a href="https://ebooks7-24.com:443/?il=16937" target="_blank">Acceder</a></li>
+            <li>Whitten, K. W., et al. (2015). <em>Química</em> (10ª ed.). Cengage Learning. <strong>Capítulo 13: Estado sólido</strong>. Secciones 13.1 a 13.8 (Sistemas cristalinos, Energías de red, Bandas de energía). Pp. 590-620. <a href="https://ebooks7-24.com:443/?il=1304" target="_blank">Acceder</a></li>
         </ul>
     </div>
 </section>
@@ -662,56 +749,16 @@
 <!-- ============ QUIZ ============ -->
 <section id="quiz" class="section">
     <div class="card">
-        <h2>🎯 Quiz de Autoevaluación</h2>
+        <h2>🎯 Quiz de Autoevaluación (10 al azar)</h2>
         <div class="quiz-container">
             <div class="quiz-stats">
                 <span class="quiz-stat">Puntuación: <span id="score">0</span></span>
-                <span class="quiz-stat">Preguntas: <span id="q-count">0</span>/4</span>
+                <span class="quiz-stat">Preguntas: <span id="q-count">0</span>/10</span>
             </div>
             <div class="quiz-progress"><div class="quiz-progress-bar-bg"><div class="quiz-progress-bar" id="quiz-bar"></div></div></div>
-            
-            <div class="quiz-question-card">
-                <div class="quiz-question">1. ¿Cuál de las siguientes afirmaciones describe mejor a un sólido amorfo?</div>
-                <div class="quiz-options">
-                    <button class="quiz-option" onclick="checkQuiz(this, true)">Tiene un punto de fusión bien definido y preciso.</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, false)">Sus partículas están ordenadas en celdas unitarias tridimensionales.</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, false)">Es excelente conductor de la electricidad en estado sólido.</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, true)">No presenta estructuras ordenadas y se ablanda progresivamente al calentarse.</button>
-                </div>
-                <div class="quiz-explanation">Un sólido amorfo carece de ordenamiento interno, por lo que no tiene un punto de fusión definido sino un intervalo de ablandamiento.</div>
-            </div>
-
-            <div class="quiz-question-card">
-                <div class="quiz-question">2. En una celda unitaria cúbica centrada en caras (F), ¿cuántos átomos efectivos pertenecen a la celda?</div>
-                <div class="quiz-options">
-                    <button class="quiz-option" onclick="checkQuiz(this, false)">1</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, false)">2</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, true)">4</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, false)">8</button>
-                </div>
-                <div class="quiz-explanation">8 esquinas × (1/8) = 1; y 6 caras × (1/2) = 3. Total = 1 + 3 = 4 átomos por celda unitaria.</div>
-            </div>
-
-            <div class="quiz-question-card">
-                <div class="quiz-question">3. ¿Qué tipo de sólido es el Diamante (C)?</div>
-                <div class="quiz-options">
-                    <button class="quiz-option" onclick="checkQuiz(this, false)">Iónico</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, false)">Metálico</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, true)">Red Covalente</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, false)">Molecular</button>
-                </div>
-                <div class="quiz-explanation">El diamante es una red covalente tridimensional donde cada carbono está unido a otros 4 carbonos mediante enlaces covalentes fuertes.</div>
-            </div>
-
-            <div class="quiz-question-card">
-                <div class="quiz-question">4. Según la Ley de Coulomb, la energía de red de un cristal iónico aumenta si:</div>
-                <div class="quiz-options">
-                    <button class="quiz-option" onclick="checkQuiz(this, false)">Disminuyen las cargas de los iones.</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, false)">Aumenta la distancia entre los iones.</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, true)">Aumentan las cargas de los iones y disminuyen sus radios.</button>
-                    <button class="quiz-option" onclick="checkQuiz(this, false)">El sólido se disuelve en agua.</button>
-                </div>
-                <div class="quiz-explanation">E es proporcional a las cargas e inversamente proporcional a la distancia. Mayor carga y menor radio iónico implican mayor energía de red.</div>
+            <div id="quiz-questions-container"></div>
+            <div style="text-align:center; margin-top:1rem;">
+                <button class="calc-button" onclick="startQuiz()">🔄 Cargar 10 Nuevas Preguntas</button>
             </div>
         </div>
     </div>
@@ -725,15 +772,13 @@
 </footer>
 
 <script>
-    // --- Navegación Principal ---
+    // --- Navegación ---
     function showSection(id, btn) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
     }
-
-    // --- Pestañas internas ---
     function showTab(group, id, btn) {
         const groupEl = document.getElementById(group);
         groupEl.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -741,26 +786,31 @@
         btn.classList.add('active');
         document.getElementById(id).classList.add('active');
     }
+    function toggleMap(element) { element.parentElement.classList.toggle('open'); }
+    function toggleGlossary(element) { element.querySelector('.glossary-definition').classList.toggle('show'); }
 
-    // --- Mapa Conceptual ---
-    function toggleMap(element) {
-        const li = element.parentElement;
-        li.classList.toggle('open');
-    }
-
-    // --- Glosario ---
-    function toggleGlossary(element) {
-        const def = element.querySelector('.glossary-definition');
-        def.classList.toggle('show');
-    }
-
-    // --- Flashcards ---
+    // --- Flashcards (20) ---
     const flashcards = [
         { q: "¿Qué es la celda unitaria?", a: "La unidad estructural más pequeña que, repetida en 3D, genera la red cristalina." },
-        { q: "Diferencia clave en el punto de fusión entre cristalino y amorfo", a: "Cristalino: Punto de fusión preciso definido. Amorfo: Se ablanda en un intervalo de temperatura." },
-        { q: "¿Qué son los cristales iónicos?", a: "Redes de cationes y aniones unidos por fuerzas electrostáticas. Duros, frágiles y conducen solo fundidos o disueltos." },
+        { q: "Diferencia clave en el punto de fusión entre cristalino y amorfo", a: "Cristalino: Preciso y definido. Amorfo: Se ablanda en un intervalo de temperatura." },
+        { q: "¿Qué son los cristales iónicos?", a: "Redes de cationes y aniones unidos por fuerzas electrostáticas. Duros, frágiles, conducen solo fundidos o disueltos." },
         { q: "Modelo del enlace metálico", a: "Iones positivos inmersos en un 'mar de electrones de valencia deslocalizados'." },
-        { q: "Ejemplo clásico de sólido covalente", a: "El diamante, donde cada carbono se une a otros 4 formando una red 3D extremadamente dura." }
+        { q: "Ejemplo clásico de sólido covalente", a: "El diamante, donde cada carbono se une a otros 4 formando una red 3D extremadamente dura." },
+        { q: "¿Qué fuerza une a los cristales moleculares apolares?", a: "Únicamente fuerzas de dispersión de London." },
+        { q: "Propiedades eléctricas de los cristales covalentes", a: "Son malos conductores (aislantes), ya que los electrones están localizados en enlaces covalentes." },
+        { q: "Fórmula de la energía de interacción Coulómbica", a: "$E = K \\frac{q_1 q_2}{d}$" },
+        { q: "¿Qué contribución hace un átomo en una esquina a la celda unitaria?", a: "Aporta 1/8 del átomo (compartido por 8 celdas)." },
+        { q: "¿Qué contribución hace un átomo en una cara a la celda unitaria?", a: "Aporta 1/2 del átomo (compartido por 2 celdas)." },
+        { q: "Diferencia entre ductilidad y maleabilidad", a: "Ductilidad: formar hilos. Maleabilidad: formar láminas. Ambas en metales." },
+        { q: "¿Por qué el mercurio (Hg) es especial entre los metales?", a: "Es el único metal líquido a temperatura ambiente y forma amalgamas disolviendo otros metales." },
+        { q: "7 Sistemas Cristalinos: ¿Cuáles tienen ángulos de 90° pero ejes distintos?", a: "Ortorrómbico ($a \\neq b \\neq c$, 90°), Tetragonal ($a=b \\neq c$, 90°) y Cúbico ($a=b=c$, 90°)." },
+        { q: "Significado de P, I, C, F en redes de Bravais", a: "P: Primitiva, I: Centrada en el cuerpo, C: Centrada en 2 caras, F: Centrada en todas las caras." },
+        { q: "¿Cómo varía la energía de red si aumentan las cargas iónicas?", a: "Aumenta (es directamente proporcional al producto de las cargas)." },
+        { q: "¿Cómo varía la energía de red si aumenta la distancia interiónica?", a: "Disminuye (es inversamente proporcional a la distancia)." },
+        { q: "Propiedad de los sólidos iónicos respecto a su volatilidad", a: "No son volátiles debido a la fuerte atracción electrostática." },
+        { q: "Solubilidad de cristales moleculares polares (ej. lactosa)", a: "Son solubles en agua u otros disolventes polares." },
+        { q: "Solubilidad de cristales moleculares apolares (ej. CO2 sólido)", a: "Son insolubles en agua pero solubles en disolventes apolares (ej. benceno)." },
+        { q: "Técnica para determinar dimensiones de la celda unitaria", a: "Difracción de Rayos X." }
     ];
     let currentFc = 0, goodFc = 0, badFc = 0;
     
@@ -776,12 +826,9 @@
         document.getElementById('fc-answer').innerText = flashcards[currentFc].a;
         document.getElementById('fc-left').innerText = flashcards.length - currentFc;
         document.getElementById('fc-bar').style.width = `${(currentFc / flashcards.length) * 100}%`;
+        if(window.MathJax) MathJax.typeset([document.getElementById('fc-card')]);
     }
-    
-    function flipCard() {
-        document.getElementById('fc-card').classList.toggle('flipped');
-    }
-    
+    function flipCard() { document.getElementById('fc-card').classList.toggle('flipped'); }
     function gradeCard(isGood) {
         if (isGood) goodFc++; else badFc++;
         document.getElementById('fc-good').innerText = goodFc;
@@ -790,7 +837,6 @@
         document.getElementById('fc-card').classList.remove('flipped');
         setTimeout(() => { loadFlashcard(); }, 300);
     }
-    
     function resetFlashcards() {
         currentFc = 0; goodFc = 0; badFc = 0;
         document.getElementById('fc-good').innerText = 0;
@@ -800,50 +846,111 @@
         document.getElementById('fc-card').classList.remove('flipped');
         loadFlashcard();
     }
-    
-    // Inicializar flashcards
     loadFlashcard();
 
-    // --- Calculadoras ---
+    // --- Herramientas ---
     function mostrarResult(id, html) {
         const el = document.getElementById(id);
         el.innerHTML = html;
         el.classList.add('show');
         if(window.MathJax) MathJax.typeset([el]);
     }
-
     function calcularParticulas() {
         const e = parseInt(document.getElementById('uc-esquinas').value) || 0;
         const c = parseInt(document.getElementById('uc-caras').value) || 0;
         const a = parseInt(document.getElementById('uc-aristas').value) || 0;
         const ce = parseInt(document.getElementById('uc-centro').value) || 0;
-        
         const total = (e * 1/8) + (c * 1/2) + (a * 1/4) + ce;
-        mostrarResult('uc-result', `El número total de átomos que pertenecen a la celda unitaria es: <strong>${total}</strong>`);
+        mostrarResult('uc-result', `Átomos totales en la celda: <strong>${total}</strong>`);
     }
-
     function calcularCoulomb() {
         const q1 = parseFloat(document.getElementById('q1').value);
         const q2 = parseFloat(document.getElementById('q2').value);
-        const d = parseFloat(document.getElementById('d-ion').value); // en nm
-        
-        // K = 8.99e9 J-m/C2. Convertimos d(nm) a m: d * 1e-9
-        // q1 y q2 se asumen en unidades de carga elemental (1.602e-19 C)
+        const d = parseFloat(document.getElementById('d-ion').value) * 1e-9; // nm to m
         const K = 8.99e9;
         const eCharge = 1.602e-19;
-        const d_m = d * 1e-9;
-        
-        const E_julios = (K * Math.abs(q1 * eCharge) * Math.abs(q2 * eCharge)) / d_m;
-        // Convertir a kJ/mol (multiplicar por N_A / 1000)
+        const E_julios = (K * Math.abs(q1 * eCharge) * Math.abs(q2 * eCharge)) / d;
         const E_kJ_mol = (E_julios * 6.022e23) / 1000;
-        
-        mostrarResult('cc-result', `La energía de interacción iónica es aproximadamente: <strong>${E_kJ_mol.toFixed(2)} \\text{ kJ/mol}</strong>`);
+        mostrarResult('cc-result', `Energía de interacción: <strong>${E_kJ_mol.toFixed(2)} \\text{ kJ/mol}</strong>`);
+    }
+    function showFraction(tipo, compartido, fraccion) {
+        mostrarResult('visual-result', `Posición: <strong>${tipo}</strong>. Este átomo es compartido por <strong>${compartido}</strong> celdas unitarias, por lo tanto, aporta solo <strong>${fraccion}</strong> de átomo a la celda actual.`);
     }
 
-    // --- Quiz ---
-    let quizScore = 0, quizCount = 0;
-    const totalQuiz = 4;
-    function checkQuiz(btn, isCorrect) {
+    // --- Quiz (30 Preguntas, 10 al azar) ---
+    const allQuestions = [
+        { q: "¿Cuál de las siguientes afirmaciones describe mejor a un sólido amorfo?", o: ["Tiene un punto de fusión bien definido.", "Sus partículas están ordenadas en celdas unitarias.", "No presenta estructuras ordenadas y se ablanda progresivamente al calentarse.", "Es excelente conductor de la electricidad en estado sólido."], c: 2, e: "Un sólido amorfo carece de ordenamiento interno, por lo que no tiene un punto de fusión definido sino un intervalo de ablandamiento." },
+        { q: "En una celda unitaria cúbica centrada en caras (F), ¿cuántos átomos efectivos pertenecen a la celda?", o: ["1", "2", "4", "8"], c: 2, e: "8 esquinas × (1/8) = 1; y 6 caras × (1/2) = 3. Total = 1 + 3 = 4 átomos." },
+        { q: "¿Qué tipo de sólido es el Diamante (C)?", o: ["Iónico", "Metálico", "Red Covalente", "Molecular"], c: 2, e: "El diamante es una red covalente 3D donde cada carbono está unido a otros 4 mediante enlaces covalentes." },
+        { q: "Según la Ley de Coulomb, la energía de red de un cristal iónico aumenta si:", o: ["Disminuyen las cargas de los iones.", "Aumenta la distancia entre los iones.", "Aumentan las cargas de los iones y disminuyen sus radios.", "El sólido se disuelve en agua."], c: 2, e: "E es proporcional a las cargas e inversamente proporcional a la distancia." },
+        { q: "¿Por qué los metales son excelentes conductores eléctricos?", o: ["Porque tienen iones negativos libres.", "Porque poseen un 'mar de electrones deslocalizados'.", "Porque sus enlaces iónicos se rompen fácilmente.", "Porque son sólidos amorfos."], c: 1, e: "La movilidad de los electrones de valencia en la estructura metálica permite la conducción." },
+        { q: "Un átomo ubicado en la arista de una celda unitaria aporta:", o: ["1/8 de átomo", "1/4 de átomo", "1/2 de átomo", "1 átomo entero"], c: 1, e: "Las aristas son compartidas por 4 celdas unitarias, por lo que aporta 1/4." },
+        { q: "¿Cuál es el único metal líquido a temperatura ambiente?", o: ["Galio", "Mercurio (Hg)", "Cesio", "Francio"], c: 1, e: "El Mercurio es líquido y forma amalgamas disolviendo otros metales." },
+        { q: "Los cristales moleculares generalmente presentan:", o: ["Puntos de fusión muy altos.", "Gran dureza.", "Puntos de fusión bajos a moderados.", "Excelente conductividad eléctrica."], c: 2, e: "Las fuerzas intermoleculares (London, puentes H) son débiles comparadas con enlaces iónicos o covalentes." },
+        { q: "La técnica de difracción de Rayos X se utiliza para:", o: ["Medir la conductividad de un metal.", "Determinar la estructura y dimensiones de la celda unitaria.", "Calcular la viscosidad de un sólido amorfo.", "Separar amalgamas."], c: 1, e: "Los rayos X al chocar con la red cristalina producen patrones de difracción que revelan su geometría." },
+        { q: "Sistema cristalino donde $a = b = c$ y $\\alpha = \\beta = \\gamma = 90^\\circ$:", o: ["Tetragonal", "Hexagonal", "Cúbico", "Triclínico"], c: 2, e: "El sistema cúbico tiene todos los ejes iguales y todos los ángulos rectos." },
+        { q: "Los sólidos iónicos en estado sólido:", o: ["Conducen la electricidad muy bien.", "Son muy volátiles.", "Son duros y quebradizos.", "Son solubles en disolventes apolares."], c: 2, e: "Son duros por la fuerte atracción electrostática, pero frágiles porque si los iones se desalinean, cargas iguales se repelen." },
+        { q: "¿Qué fuerza mantiene unidos a los cristales de hielo ($H_2O$ sólida)?", o: ["Enlaces covalentes", "Enlaces iónicos", "Puentes de hidrógeno", "Fuerzas magnéticas"], c: 2, e: "Aunque dentro de la molécula hay enlaces covalentes, entre moléculas predominan los puentes de hidrógeno." },
+        { q: "En las redes de Bravais, la letra 'I' representa:", o: ["Primitiva", "Centrada en el interior (cuerpo)", "Centrada en caras", "Centrada en base"], c: 1, e: "I viene del alemán 'Innenzentriert' (centrada en el interior)." },
+        { q: "El cuarzo ($SiO_2$) es un ejemplo de:", o: ["Sólido iónico", "Sólido molecular", "Sólido covalente", "Sólido metálico"], c: 2, e: "Forma una red tridimensional continua de átomos de Silicio y Oxígeno unidos covalentemente." },
+        { q: "Un ejemplo de sólido amorfo es:", o: ["NaCl", "Diamante", "Vidrio", "Hierro"], c: 2, e: "El vidrio es un óxido amorfo que no posee un ordenamiento reticular definido." },
+        { q: "La ductilidad es la capacidad de los metales para:", o: ["Formar láminas delgadas.", "Formar hilos.", "Disolverse en agua.", "Conducir calor."], c: 1, e: "La ductilidad permite estirar los metales en hilos finos." },
+        { q: "Si un compuesto iónico tiene iones con carga +2 y -2, su energía de red comparado con uno de +1 y -1 será:", o: ["Menor", "Mayor", "Igual", "Nula"], c: 1, e: "Por la ley de Coulomb, a mayor carga, mayor fuerza de atracción y mayor energía de red." },
+        { q: "Sistema cristalino que tiene $\\gamma = 120^\\circ$:", o: ["Monoclínico", "Hexagonal", "Romboédrico", "Ortorrómbico"], c: 1, e: "El sistema hexagonal se caracteriza por tener un eje principal perpendicular a otros tres coplanares con 120 grados entre sí." },
+        { q: "Los plásticos y polímeros orgánicos suelen ser:", o: ["Sólidos cristalinos", "Sólidos amorfos", "Cristales iónicos", "Cristales covalentes"], c: 1, e: "Las largas cadenas de polímeros se enredan sin un orden perfecto, formando sólidos amorfos." },
+        { q: "¿Por qué los sólidos covalentes como el diamante tienen puntos de fusión tan elevados?", o: ["Porque tienen electrones libres.", "Porque están unidos por fuertes enlaces covalentes en 3D.", "Porque tienen cargas iónicas altas.", "Porque son amorfos."], c: 1, e: "Romper la red 3D de enlaces covalentes requiere muchísima energía térmica." },
+        { q: "Un átomo en el centro de una celda cúbica centrada en el cuerpo (I) aporta:", o: ["1/2", "1", "1/4", "1/8"], c: 1, e: "El átomo del centro no se comparte con ninguna otra celda, pertenece entero (1)." },
+        { q: "¿Qué son las amalgamas?", o: ["Sólidos covalentes de carbono.", "Disoluciones de metales en mercurio líquido.", "Cristales iónicos de sodio.", "Polímeros amorfos."], c: 1, e: "El mercurio disuelve otros metales formando amalgamas, usadas en odontología." },
+        { q: "Los compuestos no polares como el $CO_2$ sólido son solubles en:", o: ["Agua", "Disolventes polares", "Disolventes apolares como benceno o $CCl_4$", "Nada, son insolubles"], c: 2, e: "Lo semejante disuelve a lo semejante; los apolares se disuelven en apolares." },
+        { q: "Propiedad que NO corresponde a los metales:", o: ["Maleables", "Dúctiles", "Aislantes eléctricos", "Brillantes"], c: 2, e: "Los metales son conductores, no aislantes." },
+        { q: "Sistema cristalino donde $a \\neq b \\neq c$ y $\\alpha = \\beta = \\gamma = 90^\\circ$:", o: ["Cúbico", "Tetragonal", "Ortorrómbico", "Monoclínico"], c: 2, e: "El sistema ortorrómbico tiene ejes distintos pero ángulos todos rectos." },
+        { q: "La constante $K$ en la ecuación de Coulomb tiene un valor aproximado de:", o: ["8.99 x 10^9", "6.022 x 10^23", "1.602 x 10^-19", "8.314"], c: 0, e: "K = 8.99 x 10^9 J-m/C^2." },
+        { q: "Los semiconductores amorfos se emplean en:", o: ["Memorias de computadoras", "Vidrios de ventana", "Cables eléctricos", "Empastes dentales"], c: 0, e: "Gracias a sus propiedades electrónicas en estado desordenado." },
+        { q: "¿Qué determina principalmente las propiedades físicas y estructurales de un sólido?", o: ["Su color", "Los tipos de enlaces que mantienen unidas a sus partículas.", "Su masa molar únicamente.", "Su punto de ebullición."], c: 1, e: "El tipo de enlace (iónico, covalente, metálico, molecular) dicta la estructura y propiedades." },
+        { q: "Un cristal molecular de lactosa es:", o: ["Apolar e insoluble en agua", "Polar y soluble en agua", "Covalente y muy duro", "Metálico y dúctil"], c: 1, e: "La lactosa es una molécula polar, por lo que su cristal molecular es soluble en agua." }
+    ];
+    
+    let activeQuestions = [];
+    let quizScore = 0, quizAnswered = 0;
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function startQuiz() {
+        shuffleArray(allQuestions);
+        activeQuestions = allQuestions.slice(0, 10);
+        quizScore = 0; quizAnswered = 0;
+        document.getElementById('score').innerText = 0;
+        document.getElementById('q-count').innerText = 0;
+        document.getElementById('quiz-bar').style.width = '0%';
+        renderQuiz();
+    }
+
+    function renderQuiz() {
+        const container = document.getElementById('quiz-questions-container');
+        container.innerHTML = '';
+        activeQuestions.forEach((qObj, index) => {
+            const card = document.createElement('div');
+            card.className = 'quiz-question-card';
+            let optionsHtml = '';
+            qObj.o.forEach((opt, i) => {
+                optionsHtml += `<button class="quiz-option" onclick="checkQuiz(this, ${index}, ${i === qObj.c})">${opt}</button>`;
+            });
+            card.innerHTML = `
+                <div class="quiz-question">${index + 1}. ${qObj.q}</div>
+                <div class="quiz-options">${optionsHtml}</div>
+                <div class="quiz-explanation">${qObj.e}</div>
+            `;
+            container.appendChild(card);
+        });
+        if(window.MathJax) MathJax.typeset([container]);
+    }
+
+    function checkQuiz(btn, qIndex, isCorrect) {
         const card = btn.closest('.quiz-question-card');
         const options = card.querySelectorAll('.quiz-option');
         const explanation = card.querySelector('.quiz-explanation');
@@ -855,18 +962,20 @@
             quizScore++;
         } else {
             btn.classList.add('incorrect');
-            // mostrar la correcta
-            options.forEach(o => {
-                if (o.getAttribute('onclick').includes('true')) o.classList.add('correct');
+            options.forEach((o, i) => {
+                if (i === activeQuestions[qIndex].c) o.classList.add('correct');
             });
         }
-        
         explanation.style.display = 'block';
-        quizCount++;
+        quizAnswered++;
         document.getElementById('score').innerText = quizScore;
-        document.getElementById('q-count').innerText = quizCount;
-        document.getElementById('quiz-bar').style.width = `${(quizCount / totalQuiz) * 100}%`;
+        document.getElementById('q-count').innerText = quizAnswered;
+        document.getElementById('quiz-bar').style.width = `${(quizAnswered / 10) * 100}%`;
     }
+    
+    // Iniciar quiz por defecto al cargar
+    startQuiz();
+
 </script>
 
 </body>
