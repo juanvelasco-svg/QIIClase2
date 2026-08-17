@@ -803,11 +803,32 @@
 
 <script>
     // --- Navegación ---
-    function showSection(id, btn) {
+   let quizIniciado = false;   // flag para evitar cargar varias veces
+
+   function showSection(id, btn) {
+        // Oculta todas las secciones y muestra la seleccionada
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+    
+        // Si la sección es 'quiz' y aún no se ha cargado, lo hacemos ahora
+        if (id === 'quiz' && !quizIniciado) {
+            startQuiz();
+            quizIniciado = true;
+        }
+    
+        // Configurar las imágenes para ampliar al hacer clic (se ejecuta una sola vez)
+        if (!window._imagenesConfiguradas) {
+            const imagenes = document.querySelectorAll('.img-container img, .molecule-img');
+            imagenes.forEach(img => {
+                img.style.cursor = 'pointer';
+                img.addEventListener('click', function() {
+                    window.open(this.src, '_blank');
+                });
+            });
+            window._imagenesConfiguradas = true;
+        }
     }
     function showTab(group, id, btn) {
         const groupEl = document.getElementById(group);
@@ -1003,19 +1024,6 @@
         document.getElementById('quiz-bar').style.width = `${(quizAnswered / 10) * 100}%`;
     }
     
-    (function() {
-        // Ampliar imágenes al hacer clic
-        const imagenes = document.querySelectorAll('.img-container img, .molecule-img');
-        imagenes.forEach(img => {
-            img.style.cursor = 'pointer';
-            img.addEventListener('click', function(e) {
-                window.open(this.src, '_blank');
-            });
-        });
-
-    // Iniciar el quiz con 10 preguntas
-    startQuiz();
-})();
 </script>
 
 </body>
