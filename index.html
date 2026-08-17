@@ -802,10 +802,105 @@
 </footer>
 
 <script>
-    // --- Navegación ---
-    let quizIniciado = false;   // controla si ya se cargó el quiz - DECLARADO ANTES DE USAR
+    // --- Quiz (30 Preguntas, 10 al azar) --- DEBE ESTAR ANTES DE showSection
+    const allQuestions = [
+        { q: "¿Cuál de las siguientes afirmaciones describe mejor a un sólido amorfo?", o: ["Tiene un punto de fusión bien definido.", "Sus partículas están ordenadas en celdas unitarias.", "No presenta estructuras ordenadas y se ablanda progresivamente al calentarse.", "Es excelente conductor de la electricidad en estado sólido."], c: 2, e: "Un sólido amorfo carece de ordenamiento interno, por lo que no tiene un punto de fusión definido sino un intervalo de ablandamiento." },
+        { q: "En una celda unitaria cúbica centrada en caras (F), ¿cuántos átomos efectivos pertenecen a la celda?", o: ["1", "2", "4", "8"], c: 2, e: "8 esquinas × (1/8) = 1; y 6 caras × (1/2) = 3. Total = 1 + 3 = 4 átomos." },
+        { q: "¿Qué tipo de sólido es el Diamante (C)?", o: ["Iónico", "Metálico", "Red Covalente", "Molecular"], c: 2, e: "El diamante es una red covalente 3D donde cada carbono está unido a otros 4 mediante enlaces covalentes." },
+        { q: "Según la Ley de Coulomb, la energía de red de un cristal iónico aumenta si:", o: ["Disminuyen las cargas de los iones.", "Aumenta la distancia entre los iones.", "Aumentan las cargas de los iones y disminuyen sus radios.", "El sólido se disuelve en agua."], c: 2, e: "E es proporcional a las cargas e inversamente proporcional a la distancia." },
+        { q: "¿Por qué los metales son excelentes conductores eléctricos?", o: ["Porque tienen iones negativos libres.", "Porque poseen un 'mar de electrones deslocalizados'.", "Porque sus enlaces iónicos se rompen fácilmente.", "Porque son sólidos amorfos."], c: 1, e: "La movilidad de los electrones de valencia en la estructura metálica permite la conducción." },
+        { q: "Un átomo ubicado en la arista de una celda unitaria aporta:", o: ["1/8 de átomo", "1/4 de átomo", "1/2 de átomo", "1 átomo entero"], c: 1, e: "Las aristas son compartidas por 4 celdas unitarias, por lo que aporta 1/4." },
+        { q: "¿Cuál es el único metal líquido a temperatura ambiente?", o: ["Galio", "Mercurio (Hg)", "Cesio", "Francio"], c: 1, e: "El Mercurio es líquido y forma amalgamas disolviendo otros metales." },
+        { q: "Los cristales moleculares generalmente presentan:", o: ["Puntos de fusión muy altos.", "Gran dureza.", "Puntos de fusión bajos a moderados.", "Excelente conductividad eléctrica."], c: 2, e: "Las fuerzas intermoleculares (London, puentes H) son débiles comparadas con enlaces iónicos o covalentes." },
+        { q: "La técnica de difracción de Rayos X se utiliza para:", o: ["Medir la conductividad de un metal.", "Determinar la estructura y dimensiones de la celda unitaria.", "Calcular la viscosidad de un sólido amorfo.", "Separar amalgamas."], c: 1, e: "Los rayos X al chocar con la red cristalina producen patrones de difracción que revelan su geometría." },
+        { q: "Sistema cristalino donde $a = b = c$ y $\\alpha = \\beta = \\gamma = 90^\\circ$:", o: ["Tetragonal", "Hexagonal", "Cúbico", "Triclínico"], c: 2, e: "El sistema cúbico tiene todos los ejes iguales y todos los ángulos rectos." },
+        { q: "Los sólidos iónicos en estado sólido:", o: ["Conducen la electricidad muy bien.", "Son muy volátiles.", "Son duros y quebradizos.", "Son solubles en disolventes apolares."], c: 2, e: "Son duros por la fuerte atracción electrostática, pero frágiles porque si los iones se desalinean, cargas iguales se repelen." },
+        { q: "¿Qué fuerza mantiene unidos a los cristales de hielo ($H_2O$ sólida)?", o: ["Enlaces covalentes", "Enlaces iónicos", "Puentes de hidrógeno", "Fuerzas magnéticas"], c: 2, e: "Aunque dentro de la molécula hay enlaces covalentes, entre moléculas predominan los puentes de hidrógeno." },
+        { q: "En las redes de Bravais, la letra 'I' representa:", o: ["Primitiva", "Centrada en el interior (cuerpo)", "Centrada en caras", "Centrada en base"], c: 1, e: "I viene del alemán 'Innenzentriert' (centrada en el interior)." },
+        { q: "El cuarzo ($SiO_2$) es un ejemplo de:", o: ["Sólido iónico", "Sólido molecular", "Sólido covalente", "Sólido metálico"], c: 2, e: "Forma una red tridimensional continua de átomos de Silicio y Oxígeno unidos covalentemente." },
+        { q: "Un ejemplo de sólido amorfo es:", o: ["NaCl", "Diamante", "Vidrio", "Hierro"], c: 2, e: "El vidrio es un óxido amorfo que no posee un ordenamiento reticular definido." },
+        { q: "La ductilidad es la capacidad de los metales para:", o: ["Formar láminas delgadas.", "Formar hilos.", "Disolverse en agua.", "Conducir calor."], c: 1, e: "La ductilidad permite estirar los metales en hilos finos." },
+        { q: "Si un compuesto iónico tiene iones con carga +2 y -2, su energía de red comparado con uno de +1 y -1 será:", o: ["Menor", "Mayor", "Igual", "Nula"], c: 1, e: "Por la ley de Coulomb, a mayor carga, mayor fuerza de atracción y mayor energía de red." },
+        { q: "Sistema cristalino que tiene $\\gamma = 120^\\circ$:", o: ["Monoclínico", "Hexagonal", "Romboédrico", "Ortorrómbico"], c: 1, e: "El sistema hexagonal se caracteriza por tener un eje principal perpendicular a otros tres coplanares con 120 grados entre sí." },
+        { q: "Los plásticos y polímeros orgánicos suelen ser:", o: ["Sólidos cristalinos", "Sólidos amorfos", "Cristales iónicos", "Cristales covalentes"], c: 1, e: "Las largas cadenas de polímeros se enredan sin un orden perfecto, formando sólidos amorfos." },
+        { q: "¿Por qué los sólidos covalentes como el diamante tienen puntos de fusión tan elevados?", o: ["Porque tienen electrones libres.", "Porque están unidos por fuertes enlaces covalentes en 3D.", "Porque tienen cargas iónicas altas.", "Porque son amorfos."], c: 1, e: "Romper la red 3D de enlaces covalentes requiere muchísima energía térmica." },
+        { q: "Un átomo en el centro de una celda cúbica centrada en el cuerpo (I) aporta:", o: ["1/2", "1", "1/4", "1/8"], c: 1, e: "El átomo del centro no se comparte con ninguna otra celda, pertenece entero (1)." },
+        { q: "¿Qué son las amalgamas?", o: ["Sólidos covalentes de carbono.", "Disoluciones de metales en mercurio líquido.", "Cristales iónicos de sodio.", "Polímeros amorfos."], c: 1, e: "El mercurio disuelve otros metales formando amalgamas, usadas en odontología." },
+        { q: "Los compuestos no polares como el $CO_2$ sólido son solubles en:", o: ["Agua", "Disolventes polares", "Disolventes apolares como benceno o $CCl_4$", "Nada, son insolubles"], c: 2, e: "Lo semejante disuelve a lo semejante; los apolares se disuelven en apolares." },
+        { q: "Propiedad que NO corresponde a los metales:", o: ["Maleables", "Dúctiles", "Aislantes eléctricos", "Brillantes"], c: 2, e: "Los metales son conductores, no aislantes." },
+        { q: "Sistema cristalino donde $a \\neq b \\neq c$ y $\\alpha = \\beta = \\gamma = 90^\\circ$:", o: ["Cúbico", "Tetragonal", "Ortorrómbico", "Monoclínico"], c: 2, e: "El sistema ortorrómbico tiene ejes distintos pero ángulos todos rectos." },
+        { q: "La constante $K$ en la ecuación de Coulomb tiene un valor aproximado de:", o: ["8.99 x 10^9", "6.022 x 10^23", "1.602 x 10^-19", "8.314"], c: 0, e: "K = 8.99 x 10^9 J-m/C^2." },
+        { q: "Los semiconductores amorfos se emplean en:", o: ["Memorias de computadoras", "Vidrios de ventana", "Cables eléctricos", "Empastes dentales"], c: 0, e: "Gracias a sus propiedades electrónicas en estado desordenado." },
+        { q: "¿Qué determina principalmente las propiedades físicas y estructurales de un sólido?", o: ["Su color", "Los tipos de enlaces que mantienen unidas a sus partículas.", "Su masa molar únicamente.", "Su punto de ebullición."], c: 1, e: "El tipo de enlace (iónico, covalente, metálico, molecular) dicta la estructura y propiedades." },
+        { q: "Un cristal molecular de lactosa es:", o: ["Apolar e insoluble en agua", "Polar y soluble en agua", "Covalente y muy duro", "Metálico y dúctil"], c: 1, e: "La lactosa es una molécula polar, por lo que su cristal molecular es soluble en agua." }
+    ];
     
-   function showSection(id, btn) {
+    let activeQuestions = [];
+    let quizScore = 0, quizAnswered = 0;
+    let quizIniciado = false;
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function startQuiz() {
+        shuffleArray(allQuestions);
+        activeQuestions = allQuestions.slice(0, 10);
+        quizScore = 0; quizAnswered = 0;
+        document.getElementById('score').innerText = 0;
+        document.getElementById('q-count').innerText = 0;
+        document.getElementById('quiz-bar').style.width = '0%';
+        renderQuiz();
+    }
+
+    function renderQuiz() {
+        const container = document.getElementById('quiz-questions-container');
+        container.innerHTML = '';
+        activeQuestions.forEach((qObj, index) => {
+            const card = document.createElement('div');
+            card.className = 'quiz-question-card';
+            let optionsHtml = '';
+            qObj.o.forEach((opt, i) => {
+                optionsHtml += `<button class="quiz-option" onclick="checkQuiz(this, ${index}, ${i === qObj.c})">${opt}</button>`;
+            });
+            card.innerHTML = `
+                <div class="quiz-question">${index + 1}. ${qObj.q}</div>
+                <div class="quiz-options">${optionsHtml}</div>
+                <div class="quiz-explanation">${qObj.e}</div>
+            `;
+            container.appendChild(card);
+        });
+        if(window.MathJax) MathJax.typeset([container]);
+    }
+
+    function checkQuiz(btn, qIndex, isCorrect) {
+        const card = btn.closest('.quiz-question-card');
+        const options = card.querySelectorAll('.quiz-option');
+        const explanation = card.querySelector('.quiz-explanation');
+        
+        options.forEach(o => o.disabled = true);
+        
+        if (isCorrect) {
+            btn.classList.add('correct');
+            quizScore++;
+        } else {
+            btn.classList.add('incorrect');
+            options.forEach((o, i) => {
+                if (i === activeQuestions[qIndex].c) o.classList.add('correct');
+            });
+        }
+        explanation.style.display = 'block';
+        quizAnswered++;
+        document.getElementById('score').innerText = quizScore;
+        document.getElementById('q-count').innerText = quizAnswered;
+        document.getElementById('quiz-bar').style.width = `${(quizAnswered / 10) * 100}%`;
+    }
+
+    // --- Navegación ---
+    function showSection(id, btn) {
         // Oculta todas las secciones y muestra la seleccionada
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
@@ -927,104 +1022,6 @@
     function showFraction(tipo, compartido, fraccion) {
         mostrarResult('visual-result', `Posición: <strong>${tipo}</strong>. Este átomo es compartido por <strong>${compartido}</strong> celdas unitarias, por lo tanto, aporta solo <strong>${fraccion}</strong> de átomo a la celda actual.`);
     }
-
-    // --- Quiz (30 Preguntas, 10 al azar) ---
-    const allQuestions = [
-        { q: "¿Cuál de las siguientes afirmaciones describe mejor a un sólido amorfo?", o: ["Tiene un punto de fusión bien definido.", "Sus partículas están ordenadas en celdas unitarias.", "No presenta estructuras ordenadas y se ablanda progresivamente al calentarse.", "Es excelente conductor de la electricidad en estado sólido."], c: 2, e: "Un sólido amorfo carece de ordenamiento interno, por lo que no tiene un punto de fusión definido sino un intervalo de ablandamiento." },
-        { q: "En una celda unitaria cúbica centrada en caras (F), ¿cuántos átomos efectivos pertenecen a la celda?", o: ["1", "2", "4", "8"], c: 2, e: "8 esquinas × (1/8) = 1; y 6 caras × (1/2) = 3. Total = 1 + 3 = 4 átomos." },
-        { q: "¿Qué tipo de sólido es el Diamante (C)?", o: ["Iónico", "Metálico", "Red Covalente", "Molecular"], c: 2, e: "El diamante es una red covalente 3D donde cada carbono está unido a otros 4 mediante enlaces covalentes." },
-        { q: "Según la Ley de Coulomb, la energía de red de un cristal iónico aumenta si:", o: ["Disminuyen las cargas de los iones.", "Aumenta la distancia entre los iones.", "Aumentan las cargas de los iones y disminuyen sus radios.", "El sólido se disuelve en agua."], c: 2, e: "E es proporcional a las cargas e inversamente proporcional a la distancia." },
-        { q: "¿Por qué los metales son excelentes conductores eléctricos?", o: ["Porque tienen iones negativos libres.", "Porque poseen un 'mar de electrones deslocalizados'.", "Porque sus enlaces iónicos se rompen fácilmente.", "Porque son sólidos amorfos."], c: 1, e: "La movilidad de los electrones de valencia en la estructura metálica permite la conducción." },
-        { q: "Un átomo ubicado en la arista de una celda unitaria aporta:", o: ["1/8 de átomo", "1/4 de átomo", "1/2 de átomo", "1 átomo entero"], c: 1, e: "Las aristas son compartidas por 4 celdas unitarias, por lo que aporta 1/4." },
-        { q: "¿Cuál es el único metal líquido a temperatura ambiente?", o: ["Galio", "Mercurio (Hg)", "Cesio", "Francio"], c: 1, e: "El Mercurio es líquido y forma amalgamas disolviendo otros metales." },
-        { q: "Los cristales moleculares generalmente presentan:", o: ["Puntos de fusión muy altos.", "Gran dureza.", "Puntos de fusión bajos a moderados.", "Excelente conductividad eléctrica."], c: 2, e: "Las fuerzas intermoleculares (London, puentes H) son débiles comparadas con enlaces iónicos o covalentes." },
-        { q: "La técnica de difracción de Rayos X se utiliza para:", o: ["Medir la conductividad de un metal.", "Determinar la estructura y dimensiones de la celda unitaria.", "Calcular la viscosidad de un sólido amorfo.", "Separar amalgamas."], c: 1, e: "Los rayos X al chocar con la red cristalina producen patrones de difracción que revelan su geometría." },
-        { q: "Sistema cristalino donde $a = b = c$ y $\\alpha = \\beta = \\gamma = 90^\\circ$:", o: ["Tetragonal", "Hexagonal", "Cúbico", "Triclínico"], c: 2, e: "El sistema cúbico tiene todos los ejes iguales y todos los ángulos rectos." },
-        { q: "Los sólidos iónicos en estado sólido:", o: ["Conducen la electricidad muy bien.", "Son muy volátiles.", "Son duros y quebradizos.", "Son solubles en disolventes apolares."], c: 2, e: "Son duros por la fuerte atracción electrostática, pero frágiles porque si los iones se desalinean, cargas iguales se repelen." },
-        { q: "¿Qué fuerza mantiene unidos a los cristales de hielo ($H_2O$ sólida)?", o: ["Enlaces covalentes", "Enlaces iónicos", "Puentes de hidrógeno", "Fuerzas magnéticas"], c: 2, e: "Aunque dentro de la molécula hay enlaces covalentes, entre moléculas predominan los puentes de hidrógeno." },
-        { q: "En las redes de Bravais, la letra 'I' representa:", o: ["Primitiva", "Centrada en el interior (cuerpo)", "Centrada en caras", "Centrada en base"], c: 1, e: "I viene del alemán 'Innenzentriert' (centrada en el interior)." },
-        { q: "El cuarzo ($SiO_2$) es un ejemplo de:", o: ["Sólido iónico", "Sólido molecular", "Sólido covalente", "Sólido metálico"], c: 2, e: "Forma una red tridimensional continua de átomos de Silicio y Oxígeno unidos covalentemente." },
-        { q: "Un ejemplo de sólido amorfo es:", o: ["NaCl", "Diamante", "Vidrio", "Hierro"], c: 2, e: "El vidrio es un óxido amorfo que no posee un ordenamiento reticular definido." },
-        { q: "La ductilidad es la capacidad de los metales para:", o: ["Formar láminas delgadas.", "Formar hilos.", "Disolverse en agua.", "Conducir calor."], c: 1, e: "La ductilidad permite estirar los metales en hilos finos." },
-        { q: "Si un compuesto iónico tiene iones con carga +2 y -2, su energía de red comparado con uno de +1 y -1 será:", o: ["Menor", "Mayor", "Igual", "Nula"], c: 1, e: "Por la ley de Coulomb, a mayor carga, mayor fuerza de atracción y mayor energía de red." },
-        { q: "Sistema cristalino que tiene $\\gamma = 120^\\circ$:", o: ["Monoclínico", "Hexagonal", "Romboédrico", "Ortorrómbico"], c: 1, e: "El sistema hexagonal se caracteriza por tener un eje principal perpendicular a otros tres coplanares con 120 grados entre sí." },
-        { q: "Los plásticos y polímeros orgánicos suelen ser:", o: ["Sólidos cristalinos", "Sólidos amorfos", "Cristales iónicos", "Cristales covalentes"], c: 1, e: "Las largas cadenas de polímeros se enredan sin un orden perfecto, formando sólidos amorfos." },
-        { q: "¿Por qué los sólidos covalentes como el diamante tienen puntos de fusión tan elevados?", o: ["Porque tienen electrones libres.", "Porque están unidos por fuertes enlaces covalentes en 3D.", "Porque tienen cargas iónicas altas.", "Porque son amorfos."], c: 1, e: "Romper la red 3D de enlaces covalentes requiere muchísima energía térmica." },
-        { q: "Un átomo en el centro de una celda cúbica centrada en el cuerpo (I) aporta:", o: ["1/2", "1", "1/4", "1/8"], c: 1, e: "El átomo del centro no se comparte con ninguna otra celda, pertenece entero (1)." },
-        { q: "¿Qué son las amalgamas?", o: ["Sólidos covalentes de carbono.", "Disoluciones de metales en mercurio líquido.", "Cristales iónicos de sodio.", "Polímeros amorfos."], c: 1, e: "El mercurio disuelve otros metales formando amalgamas, usadas en odontología." },
-        { q: "Los compuestos no polares como el $CO_2$ sólido son solubles en:", o: ["Agua", "Disolventes polares", "Disolventes apolares como benceno o $CCl_4$", "Nada, son insolubles"], c: 2, e: "Lo semejante disuelve a lo semejante; los apolares se disuelven en apolares." },
-        { q: "Propiedad que NO corresponde a los metales:", o: ["Maleables", "Dúctiles", "Aislantes eléctricos", "Brillantes"], c: 2, e: "Los metales son conductores, no aislantes." },
-        { q: "Sistema cristalino donde $a \\neq b \\neq c$ y $\\alpha = \\beta = \\gamma = 90^\\circ$:", o: ["Cúbico", "Tetragonal", "Ortorrómbico", "Monoclínico"], c: 2, e: "El sistema ortorrómbico tiene ejes distintos pero ángulos todos rectos." },
-        { q: "La constante $K$ en la ecuación de Coulomb tiene un valor aproximado de:", o: ["8.99 x 10^9", "6.022 x 10^23", "1.602 x 10^-19", "8.314"], c: 0, e: "K = 8.99 x 10^9 J-m/C^2." },
-        { q: "Los semiconductores amorfos se emplean en:", o: ["Memorias de computadoras", "Vidrios de ventana", "Cables eléctricos", "Empastes dentales"], c: 0, e: "Gracias a sus propiedades electrónicas en estado desordenado." },
-        { q: "¿Qué determina principalmente las propiedades físicas y estructurales de un sólido?", o: ["Su color", "Los tipos de enlaces que mantienen unidas a sus partículas.", "Su masa molar únicamente.", "Su punto de ebullición."], c: 1, e: "El tipo de enlace (iónico, covalente, metálico, molecular) dicta la estructura y propiedades." },
-        { q: "Un cristal molecular de lactosa es:", o: ["Apolar e insoluble en agua", "Polar y soluble en agua", "Covalente y muy duro", "Metálico y dúctil"], c: 1, e: "La lactosa es una molécula polar, por lo que su cristal molecular es soluble en agua." }
-    ];
-    
-    let activeQuestions = [];
-    let quizScore = 0, quizAnswered = 0;
-    // quizIniciado ya está declarado arriba en la sección de Navegación
-
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
-
-    function startQuiz() {
-        shuffleArray(allQuestions);
-        activeQuestions = allQuestions.slice(0, 10);
-        quizScore = 0; quizAnswered = 0;
-        document.getElementById('score').innerText = 0;
-        document.getElementById('q-count').innerText = 0;
-        document.getElementById('quiz-bar').style.width = '0%';
-        renderQuiz();
-    }
-
-    function renderQuiz() {
-        const container = document.getElementById('quiz-questions-container');
-        container.innerHTML = '';
-        activeQuestions.forEach((qObj, index) => {
-            const card = document.createElement('div');
-            card.className = 'quiz-question-card';
-            let optionsHtml = '';
-            qObj.o.forEach((opt, i) => {
-                optionsHtml += `<button class="quiz-option" onclick="checkQuiz(this, ${index}, ${i === qObj.c})">${opt}</button>`;
-            });
-            card.innerHTML = `
-                <div class="quiz-question">${index + 1}. ${qObj.q}</div>
-                <div class="quiz-options">${optionsHtml}</div>
-                <div class="quiz-explanation">${qObj.e}</div>
-            `;
-            container.appendChild(card);
-        });
-        if(window.MathJax) MathJax.typeset([container]);
-    }
-
-    function checkQuiz(btn, qIndex, isCorrect) {
-        const card = btn.closest('.quiz-question-card');
-        const options = card.querySelectorAll('.quiz-option');
-        const explanation = card.querySelector('.quiz-explanation');
-        
-        options.forEach(o => o.disabled = true);
-        
-        if (isCorrect) {
-            btn.classList.add('correct');
-            quizScore++;
-        } else {
-            btn.classList.add('incorrect');
-            options.forEach((o, i) => {
-                if (i === activeQuestions[qIndex].c) o.classList.add('correct');
-            });
-        }
-        explanation.style.display = 'block';
-        quizAnswered++;
-        document.getElementById('score').innerText = quizScore;
-        document.getElementById('q-count').innerText = quizAnswered;
-        document.getElementById('quiz-bar').style.width = `${(quizAnswered / 10) * 100}%`;
-    }
-    
 </script>
 
 </body>
