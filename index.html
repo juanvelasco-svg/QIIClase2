@@ -803,6 +803,8 @@
 
 <script>
     // --- Navegación ---
+    let quizIniciado = false;   // controla si ya se cargó el quiz - DECLARADO ANTES DE USAR
+    
    function showSection(id, btn) {
         // Oculta todas las secciones y muestra la seleccionada
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -961,7 +963,7 @@
     
     let activeQuestions = [];
     let quizScore = 0, quizAnswered = 0;
-    let quizIniciado = false;   // controla si ya se cargó el quiz
+    // quizIniciado ya está declarado arriba en la sección de Navegación
 
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
