@@ -1003,12 +1003,7 @@
         document.getElementById('quiz-bar').style.width = `${(quizAnswered / 10) * 100}%`;
     }
     
-    // Iniciar quiz por defecto al cargar
-   document.addEventListener('DOMContentLoaded', function() {
-        startQuiz();
-    });
-
-  // ============================================================
+        // ============================================================
         //  AMPLIAR IMÁGENES AL HACER CLIC
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
@@ -1023,6 +1018,7 @@
                     window.open(this.src, '_blank');
                 });
             });
+            startQuiz();
         });
 </script>
 
