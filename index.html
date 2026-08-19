@@ -974,13 +974,24 @@
         document.getElementById('fc-bar').style.width = `${(currentFc / flashcards.length) * 100}%`;
         if(window.MathJax) MathJax.typeset([document.getElementById('fc-card')]);
     }
-    function flipCard() { document.getElementById('fc-card').classList.toggle('flipped'); }
+    function flipCard() { 
+        const card = document.getElementById('fc-card');
+        card.classList.toggle('flipped');
+        // Habilitar botones después de voltear
+        if (card.classList.contains('flipped')) {
+            document.getElementById('btn-fc-good').disabled = false;
+            document.getElementById('btn-fc-bad').disabled = false;
+        }
+    }
     function gradeCard(isGood) {
         if (isGood) goodFc++; else badFc++;
         document.getElementById('fc-good').innerText = goodFc;
         document.getElementById('fc-bad').innerText = badFc;
         currentFc++;
         document.getElementById('fc-card').classList.remove('flipped');
+        // Deshabilitar botones hasta que se voltee la nueva tarjeta
+        document.getElementById('btn-fc-good').disabled = true;
+        document.getElementById('btn-fc-bad').disabled = true;
         setTimeout(() => { loadFlashcard(); }, 300);
     }
     function resetFlashcards() {
